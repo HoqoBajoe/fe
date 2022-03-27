@@ -1,0 +1,17 @@
+-di card kurang rating
+-sama coba buat style pricenya lebih keren
+
+https://tailwind-elements.com/quick-start/
+masih kurang carousel  v
+pake card template   v
+
+
+buat footer  v
+buat navbar
+buat testimoni box
+buat box alasan  v
+buat homenya 
+
+buat responsive
+
+#membuat mapping untuk card kemudian jika ketemu kata diminati maka pake card yg paling banyak diminati
