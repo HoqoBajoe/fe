@@ -6,8 +6,8 @@ import { IoMdChatbubbles } from "react-icons/io";
 function Info() {
   return (
     <div>
-        <h1 className="text-4xl font-bold text-black py-6 mb-9">Kenapa Memilih Kami ?</h1>
-        <div className='max-w-fit mx-auto flex gap-28'>
+        <h1 className="text-3xl sm:text-4xl font-bold text-black py-6 mb-9">Kenapa Memilih Kami ?</h1>
+        <div className='max-w-fit mx-auto flex flex-col gap-10 sm:gap-28 sm:flex-row p-0'>
             <div className='w-72 grid justify-items-center'>
                 <div className='bg-gray w-16 h-16 flex justify-center items-center rounded-full'>
                     <FaGlobe color='white' className='w-8 h-8'/>
