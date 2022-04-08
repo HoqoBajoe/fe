@@ -4,7 +4,7 @@ import Gambar from "../../Images/background.jpg"
 function Testimonial() {
   return (
     <div>
-      {/* <h1 className="text-4xl font-bold text-black py-6 mb-9">Apa Kata Mereka?</h1>
+      <h1 className="text-4xl font-bold text-black py-6 mb-9">Apa Kata Mereka?</h1>
 
       <div id="carouselExampleControls" class="carousel slide relative" data-bs-ride="carousel">
         <div class="carousel-inner relative w-full overflow-hidden">
@@ -77,7 +77,7 @@ function Testimonial() {
           <span class="carousel-control-next-icon inline-block bg-no-repeat" aria-hidden="true"></span>
           <span class="visually-hidden">Next</span>
         </button>
-      </div> */}
+      </div>
     </div>
   )
 }
