@@ -30,8 +30,13 @@ module.exports = {
       'gray': '#091426',
       'gray-light': '#d3dce6',
       'white' : '#ffffff',
+      'red' : '#e03131 '
     },
-    extend: {},
+    extend: {
+      backgroundImage: {
+        'home' : "url('/src/Images/bgimage.jpg')"
+      }
+    },
   },
   plugins: [require('tw-elements/dist/plugin')],
 }
