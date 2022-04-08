@@ -1,5 +1,4 @@
 import React from "react";
-import '../loginstyle.css'
 
 
 
@@ -20,7 +19,7 @@ function Login(){
                     </div>
                     <div className="row">
                         <div className="col text-center">
-                            <button className="btn btn-default text-white w-50 h-50 mt-5 " style={{backgroundColor: "#091426", borderRadius: "10px", fontWeight: "bold", fontSize: "large"}}>Login</button>
+                            <button className="btn btn-default text-white w-50 h-50 mt-5 " style={{backgroundColor: "#091426", borderRadius: "20px", fontWeight: "bold", fontSize: "large"}}>Login</button>
                         </div>
                     </div>
                     <div className="mt-3 text-center">
