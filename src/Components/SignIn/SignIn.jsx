@@ -2,35 +2,33 @@ import React from "react";
 
 function SignIn() {
     return(
-        <div className="container mb-5 ">
-        <div className="container mb-5 ">
-            <div className="row mx-auto px-3 py-5 mt-5 w-50 bg-white shadow align-items-center border" style={{maxHeight: "700px", minWidth: "330px", borderRadius: "10px"}}>
-                <form action="">
-                    <h1 className="text-center mb-5" style={{fontWeight: "bolder"}} >Hoqo Bajoe</h1>
-                    <div className="mb-3">
-                        <label for="Username" className="form-label" style={{fontWeight: "bold"}}>Username</label>
-                        <input type="text" className="form-control" style={{borderRadius: "10px"}} id="Username" ></input>
+        <div>
+        <div className="bg-home h-screen bg-cover bg-no-repeat flex">
+            <div className="w-1/3 e m-auto mt-36 p-2 border-solid rounded-xl shadow-2xl mb-20 bg-ivory min-w-max block">               
+                <form>
+                    <h1 className="text-center my-9 text-4xl font-extrabold ">Hoqo Bajoe</h1>
+                    <div className="mb-4 mt-10 lg:mx-10 sm:mx-5 md:mx-5">
+                        <label className="block mb-2" for="username">Username</label>
+                        <input className="w-full rounded-lg p-4 h-10 shadow-md leading-tight hover:shadow-lg" type="text" name="username" id="" placeholder=""></input>
                     </div>
-                    <div className="mb-3">
-                        <label for="Email" className="form-label" style={{fontWeight: "bold"}}>Email</label>
-                        <input type="text" className="form-control" style={{borderRadius: "10px"}} id="Email" ></input>
+                    <div className="mb-4 lg:mx-10 sm:mx-5 md:mx-5">
+                        <label className="block mb-2" for="email">Email</label>
+                        <input className="w-full rounded-lg p-4 h-10 shadow-md leading-tight hover:shadow-lg" type="text" name="email" id="" placeholder=""></input>
                     </div>
-                    <div className="mb-3">
-                        <label for="password" className="form-label" style={{fontWeight: "bold"}} >Password</label>
-                        <input type="password" className="form-control" style={{borderRadius: "10px"}} id="password"></input>
+                    <div className="lg:mx-10 sm:mx-5 md:mx-5">
+                        <label className="block mb-2" for="password">Password</label>
+                        <input className="w-full rounded-lg p-4 h-10 shadow-md hover:shadow-lg" type="password" name="password" id="" placeholder=""></input>
                     </div>
-                    <div className="row">
-                        <div className="col text-center">
-                            <button className="btn btn-default text-white w-50 " style={{backgroundColor: "#091426", borderRadius: "20px", fontWeight: "bold", fontSize: "large",marginTop:"100px",height: "50px"}}>Sign In</button>
-                        </div>
+                    <div className="flex justify-center mt-10">
+                        <button type="submit" className="bg-gray px-6 py-2.5 leading-tight uppercase text-white rounded-xl shadow-md hover:bg-gray-green w-56">Sign In</button>   
                     </div>
-                    <div className="mt-4 text-center">
-                        <a className="btn text-black" style={{textDecoration: "none", fontWeight: "bold"}}>Back To Login</a>
-                    </div>  
-                </form>
+                    <div className="flex justify-center mt-5 mb-5">
+                        <a href="#" className="font-bold shadow-sm hover:shadow-lg hover:border-b-2">Back To Login</a>
+                    </div>
+                </form>                 
             </div>
-        </div>    
-        </div>     
+        </div>
+    </div>    
     )
 }
 

@@ -30,11 +30,14 @@ module.exports = {
       'gray': '#091426',
       'gray-light': '#d3dce6',
       'white' : '#ffffff',
-      'red' : '#e03131 '
+      'red' : '#e03131 ',
+      'gray-green' : '#293332',
+      'ivory' : '#e8e8e8'
+      
     },
     extend: {
       backgroundImage: {
-        'home' : "url('/src/Images/bgimage.jpg')"
+        'home' : "url('/src/Images/bgimage.jpg')",
       }
     },
   },
