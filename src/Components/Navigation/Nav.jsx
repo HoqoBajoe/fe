@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { HiUserCircle } from "react-icons/hi";
+import { Link } from 'react-router-dom';
 
 const Nav = () => {
     let [open,setOpen]=useState(false);
@@ -42,7 +43,9 @@ const Nav = () => {
                 </ul>
 
                 <div>
-                    <HiUserCircle color='white' className='w-8 h-8'/>
+                    <Link to="/login">
+                        <HiUserCircle color='white' className='w-8 h-8'/>
+                    </Link>  
                 </div>
             </div>
         </div>

@@ -1,8 +1,8 @@
 import React from 'react'
-import ListCustomers from '../../Components/ManageUser/ListCustomers'
-import ManageComment from '../../Components/ManageUser/ManageComment'
-import ManageUser from '../../Components/ManageUser/ManageUser'
-import SideBarSuperAdmin from '../../Components/Navigation/SideBarSuperAdmin'
+import ListCustomers from '../Components/ManageUser/ListCustomers'
+import ManageComment from '../Components/ManageUser/ManageComment'
+import ManageUser from '../Components/ManageUser/ManageUser'
+import SideBarSuperAdmin from '../Components/Navigation/SideBarSuperAdmin'
 
 function DashboardSuperAdmin() {
   return (
