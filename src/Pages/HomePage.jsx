@@ -1,12 +1,11 @@
 import React from 'react'
-import HomeUser from './Components/Card/HomeUser'
-import Info from './Components/Information/Info'
+import HomeUser from '../Components/Card/HomeUser'
+import Info from '../Components/Information/Info'
 import { AiOutlineLine } from "react-icons/ai";
-import Testimonial from './Components/Testi/Testimonial';
-import Footer from './Components/Navigation/Footer';
-import Navbar from './Components/Navigation/Navbar';
-import DashboardUser from './Components/Information/DashboardUser';
-import Nav from './Components/Navigation/Nav';
+import Testimonial from '../Components/Testi/Testimonial';
+import Footer from '../Components/Navigation/Footer';
+import DashboardUser from '../Components/Information/DashboardUser';
+import Nav from '../Components/Navigation/Nav';
 
 function HomePage() {
   return (

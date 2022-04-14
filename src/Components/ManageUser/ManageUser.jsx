@@ -4,7 +4,7 @@ import ManageComment from './ManageComment'
 
 function ManageUser() {
   return (
-    <div>
+    <div className='mt-10'>
         <ManageComment/>
         <ListCustomers/>
     </div>

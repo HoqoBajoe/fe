@@ -2,6 +2,7 @@ import React from 'react'
 import UserProfile from '../../Images/man.png'
 
 function SideBarSuperAdmin() {
+
   return (
     <div className='w-72 h-screen bg-gray p-2'>
         <div className='pt-4'>
@@ -12,8 +13,10 @@ function SideBarSuperAdmin() {
             </div>
             
             <div className='border border-gray-dark mb-4'></div>
+
             <ul className='text-white ml-5 list-none'>
                 <li className='hover:font-semibold hover:cursor-pointer'>Home</li>
+                
                 <li className='hover:font-semibold hover:cursor-pointer'>Customers</li>
                 <li className='hover:font-semibold hover:cursor-pointer'>Transactions</li>
             </ul>            

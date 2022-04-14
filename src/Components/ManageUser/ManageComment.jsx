@@ -3,11 +3,11 @@ import UserProfile from '../../Images/man.png'
 
 function ManageComment() {
   return (
-    <div className='w-3/4 mx-auto'>
-        <h1 className="text-3xl sm:text-4xl font-bold text-black mb-8">Manage Comment</h1>
+    <div className='w-full mx-auto mb-20'>
+        <h1 className="text-3xl sm:text-4xl font-bold text-black mb-8">Manage Review</h1>
         <div className='border border-gray-light mb-8'></div>
 
-        <div className='bg-white rounded-xl drop-shadow-lg p-3 border border-gray-light mb-5 w-3/4 mx-auto'>
+        <div className='bg-white rounded-xl drop-shadow-lg p-3 border border-gray-light mb-5 w-full mx-auto'>
             <div className='flex items-start mb-8'>
                 <img src={UserProfile} className='w-14 mr-4 '/>
                 <div className='mb-2'>

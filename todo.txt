@@ -15,3 +15,12 @@ buat homenya
 buat responsive
 
 #membuat mapping untuk card kemudian jika ketemu kata diminati maka pake card yg paling banyak diminati
+
+
+transasksi (accept dan reject)
+history transaksi
+
+CRUD paket wisata
+
+Add Admin
+List Admin
