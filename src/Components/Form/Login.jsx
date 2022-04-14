@@ -65,7 +65,7 @@ function Login() {
                                 <button type="submit" className="bg-gray px-6 py-2.5 leading-tight uppercase text-white font-semibold rounded-xl shadow-md hover:bg-gray-green w-56 transition">Login</button>   
                             </div>
                             <div className="flex justify-center mt-5 mb-5">
-                                <a href="#" className="font-bold shadow-sm hover:shadow-lg hover:border-b-2 transition">Create Account</a>
+                                <a href={'/signin'} className="font-bold shadow-sm hover:shadow-lg hover:border-b-2 transition">Create Account</a>
                             </div>
                         </form>                 
                     </div>
