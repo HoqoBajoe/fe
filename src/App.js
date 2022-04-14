@@ -1,15 +1,33 @@
-import HomePage from "./HomePage";
-import "bootstrap/dist/css/bootstrap.min.css"
-import Loginpage from "./Loginpage";
-import SignInPage from "./SignInPage";
-
+import DashboardSuperAdmin from "./Pages/DashboardSuperAdmin";
+import HomePage from "./Pages/HomePage";
+import {
+  BrowserRouter ,
+  Routes,
+  Route,
+  Link
+} from "react-router-dom";
+// import { store, persistor } from "./Redux/Store";
+import { PersistGate } from "redux-persist/integration/react";
+import { Provider } from "react-redux";
+import Login from "./Components/Form/Login";
+import { store,persistor } from "./Redux/Store";
+import RegisUser from "./Components/Form/RegisUser";
 
 function App() {
   return (
     <div className="App">
-      {/* <HomePage/> */}
-      <Loginpage/>
-      {/* <SignInPage/> */}
+      <Provider store={store}>
+        <PersistGate loading={null} persistor={persistor}>
+          <BrowserRouter>
+            <Routes>
+              <Route path="/" element={<HomePage />} />
+              <Route path="/dashboard" element={<DashboardSuperAdmin/>}/>
+              <Route path="/login" element={<Login/>}/>
+              <Route path="/register" element={<RegisUser/>}/>
+            </Routes>   
+          </BrowserRouter>
+        </PersistGate>
+      </Provider>
     </div>
   );
 }
