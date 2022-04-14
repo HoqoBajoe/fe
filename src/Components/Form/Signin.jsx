@@ -1,6 +1,10 @@
-import React from "react";
+import React, { useState } from 'react'
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { Axios } from '../../Helper/axios';
 
-function SignIn() {
+function Signin(){
+
     return(
         <div>
             <div className="bg-home h-screen bg-cover bg-no-repeat flex">
@@ -30,8 +34,8 @@ function SignIn() {
                     </div>
                 </div>
             </div>
-    </div>    
+        </div>   
     )
 }
 
-export default SignIn
+export default Signin

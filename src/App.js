@@ -9,7 +9,8 @@ import {
 // import { store, persistor } from "./Redux/Store";
 import { PersistGate } from "redux-persist/integration/react";
 import { Provider } from "react-redux";
-import Login from "./Components/Form/Login";
+import Loginpage from "./Pages/Loginpage";
+import SignInPage from "./Pages/SignInPage";
 import { store,persistor } from "./Redux/Store";
 
 function App() {
@@ -23,7 +24,8 @@ function App() {
               <Route path="/" element={<HomePage />} />
             {/* <HomePage/> */}
               <Route path="/dashboard" element={<DashboardSuperAdmin/>}/>
-              <Route path="/login" element={<Login/>}/>
+              <Route path="/login" element={<Loginpage/>}/>
+              <Route path="/signin" element={<SignInPage/>}/>
             </Routes>   
           </BrowserRouter>
         </PersistGate>

@@ -1,14 +1,14 @@
 import React from 'react'
-import Footer from './Components/Navigation/Footer';
-import SignIn from './Components/SignIn/SignIn';
-import Nav from './Components/Navigation/Nav';
+import Footer from '../Components/Navigation/Footer';
+import Signin from '../Components/Form/Signin';
+import Nav from '../Components/Navigation/Nav';
 
 function SignInPage(){
     return(
         <div>
             <Nav/>
             <div>
-                <SignIn />               
+                <Signin />               
             </div>           
             <Footer /> 
         </div>
