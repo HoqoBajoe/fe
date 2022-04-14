@@ -9,8 +9,8 @@ function SignInPage(){
             <Nav/>
             <div>
                 <SignIn />               
-            </div>
-            <Footer />
+            </div>           
+            <Footer /> 
         </div>
     )
 }
