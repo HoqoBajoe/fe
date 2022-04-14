@@ -1,4 +1,4 @@
-import DashboardSuperAdmin from "./Pages/SuperAdmin/DashboardSuperAdmin";
+import DashboardSuperAdmin from "./Pages/DashboardSuperAdmin";
 import HomePage from "./Pages/HomePage";
 import {
   BrowserRouter ,
@@ -12,6 +12,7 @@ import { Provider } from "react-redux";
 import Loginpage from "./Pages/Loginpage";
 import SignInPage from "./Pages/SignInPage";
 import { store,persistor } from "./Redux/Store";
+import RegisUser from "./Components/Form/RegisUser";
 
 function App() {
   return (
@@ -19,13 +20,11 @@ function App() {
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
           <BrowserRouter>
-            {/* <Sidebar /> */}
             <Routes>
               <Route path="/" element={<HomePage />} />
-            {/* <HomePage/> */}
               <Route path="/dashboard" element={<DashboardSuperAdmin/>}/>
-              <Route path="/login" element={<Loginpage/>}/>
-              <Route path="/signin" element={<SignInPage/>}/>
+              <Route path="/login" element={<Login/>}/>
+              <Route path="/register" element={<RegisUser/>}/>
             </Routes>   
           </BrowserRouter>
         </PersistGate>

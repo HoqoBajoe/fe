@@ -1,8 +1,11 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import Cookies from 'universal-cookie';
 import { Axios } from '../../Helper/axios';
 import { login } from '../../Redux/AdminSlice';
+import { Base64 } from "js-base64";
+import axios from 'axios';
 
 function Login() {
     const [form, setForm] = useState({
@@ -10,8 +13,11 @@ function Login() {
         password: "",
     })
 
+    const [error, setError] = useState("");
+
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const cookies = new Cookies();
 
     const onChange = (e) => {
         const name = e.target.name;
@@ -20,30 +26,36 @@ function Login() {
     };
 
     const onSubmit = (e) =>{
-        e.preventDefault();
-        Axios
-            .post(`/login`,{...form})
+        axios
+            .post('http://hoqobajoe.herokuapp.com/api/login',{...form})
             .then((resp) =>{
                 console.log("ini respon: ", resp)
-                dispatch(
-                    login({
-                        id: resp.data.data.id,
-                        nama: resp.data.data.nama,
-                        email: resp.data.data.email,
-                        role: resp.data.data.role,
-                        token: resp.data.data.token,
-                    })
-                )
-                .then(function(){
+                const hash = Base64.encode(resp.data.data.token);
+                cookies.set("token", hash, {
+                path: "/login",
+                domain: window.location.hostname,
+                });
+                if (resp.data.data.role == 'super-admin' || resp.data.data.role == 'admin'){
+                    dispatch(
+                        login({
+                            id: resp.data.data.id,
+                            nama: resp.data.data.nama,
+                            email: resp.data.data.email,
+                            role: resp.data.data.role,
+                            token: resp.data.data.token,
+                        }) 
+                    )
+                    sessionStorage.setItem('token', resp.data.data.token)
                     navigate("/dashboard")
-                })
+                } else {
+                    e.preventDefault();
+                    setError("Anda Belum terdaftar");
+                }
+                
             })
-            .catch((error) =>{
-                // console.log(error.response.data.errors[0])
-            })
+            .catch(err => setError("Anda Belum terdaftar"));
         // console.log("masuk")
     }
-    console.log(form)
     
   
     return (
