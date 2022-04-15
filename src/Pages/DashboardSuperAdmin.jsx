@@ -8,7 +8,7 @@ function DashboardSuperAdmin() {
   return (
     <div className='flex'>
         <SideBarSuperAdmin/>
-        <div className='w-4/6 mx-auto'>
+        <div className='w-9/12 mx-auto'>
           {/* <ManageComment/> */}
           {/* <ListCustomers/> */}
           <ManageUser/>

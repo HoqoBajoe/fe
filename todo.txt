@@ -24,3 +24,11 @@ CRUD paket wisata
 
 Add Admin
 List Admin
+
+
+15 april 2022
+-home : tampilan tabel belum oke, sama request rejectnya belum bisa
+
+-manage admin : tampilan masih kurang, sama load dtanya masih perlu refresh manual
+
+-taour package: passingid buat edit sama tampilannya juga

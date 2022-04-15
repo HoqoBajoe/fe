@@ -32,9 +32,10 @@ function Login() {
                 console.log("ini respon: ", resp)
                 const hash = Base64.encode(resp.data.data.token);
                 cookies.set("token", hash, {
-                path: "/login",
+                path: "/dashboard",
                 domain: window.location.hostname,
                 });
+
                 if (resp.data.data.role == 'super-admin' || resp.data.data.role == 'admin'){
                     dispatch(
                         login({
