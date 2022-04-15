@@ -21,14 +21,14 @@ function GenerateAxiosConfig() {
 function ListCustomers() {
     const [customer, setCustomer] = useState([]);
     const fetch = async () => {
-        await Axios.get(`/user`).then((resp) =>{
+        await Axios.get(`/user`, GenerateAxiosConfig()).then((resp) =>{
             setCustomer(resp.data.data)
         })
     }
 
-    const deleteCust = (item) =>{
+    const deleteCust = (id) =>{
         Axios
-            .delete(`/user/delete/${item.id}`, GenerateAxiosConfig())
+            .delete(`/user/delete/${id}`)
             .then(() => {
                 alert("Berhasil menghapus customer")
             })
@@ -57,7 +57,7 @@ function ListCustomers() {
             <div className='border border-gray-light mb-8'></div>
 
             {customer?.map((item) =>(
-                <div className='flex items-center justify-between gap-24 bg-white rounded-xl drop-shadow-lg hover:drop-shadow-2xl p-3 border border-gray-light w-max mx-auto mb-8'>
+                <div key={item.id} className='flex items-center justify-between gap-24 bg-white rounded-xl drop-shadow-lg hover:drop-shadow-2xl p-3 border border-gray-light w-max mx-auto mb-8'>
                     <div className='flex items-center'>
                         <img src={UserProfile} className='w-14 mr-4 '/>
                         <div className='w-64'>
@@ -66,9 +66,9 @@ function ListCustomers() {
                         </div>
                     </div>
                     
-                    <p className='sm:text-lg font-medium text-black w-28'>{item.role}</p>
+                    <p className='sm:text-lg font-medium text-black w-28'>{item.role == "user"? "Customer" : item.role}</p>
                     <p className='sm:text-lg font-medium text-black w-28'>{moment(item.created_at).format('L')}</p>
-                    <button className='bg-red h-max p-2 rounded-lg' onClick={()=>deleteCust(item)}>
+                    <button className='bg-red h-max p-2 rounded-lg' onClick={()=>deleteCust(item.id)}>
                         <FaTrashAlt className='fill-white w-5 h-5'/>
                     </button>
                 </div>
