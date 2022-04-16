@@ -4,7 +4,8 @@ import UserProfile from '../../Images/man.png'
 import { FiLogOut } from "react-icons/fi";
 import { logout } from '../../Redux/AdminSlice';
 import Cookies from 'universal-cookie';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { Axios } from '../../Helper/axios';
 
 function SideBarSuperAdmin() {
   const user = useSelector((state) => state.admin)
@@ -20,7 +21,21 @@ function SideBarSuperAdmin() {
   const [form, setForm] = useState(initialValue)
   const roleCheck = "admin"
 
+   const fetch = async () => {
+        await Axios.get(`/logout`)
+          .then((resp) =>{
+            dispatch(logout());
+            cookies.remove("token", { path: "/", domain: window.location.hostname });
+            if (window.location.pathname) {
+              navigate("/");
+            } else {
+              window.location.reload();
+            }
+        })
+    }
+
   const onClick = () => {
+    
     dispatch(logout());
     cookies.remove("token", { path: "/", domain: window.location.hostname });
     if (window.location.pathname) {
@@ -31,38 +46,46 @@ function SideBarSuperAdmin() {
   };
 
   return (
-    // <div className='fixed'>
-    <div className='w-72 h-screen bg-gray static '>
-        <div className='pt-4 p-2'>
+    <div className='sticky top-0 h-screen'>
+    <div className='w-72 h-screen bg-gray flex flex-col justify-between'>
+        <div className='pt-4 p-2 text-[#f8f9fa]'>
             <img src={UserProfile} className='w-14 h-14 mx-auto mb-4'/>
             <div className='w-max mx-auto mb-2'>
-                <p className="text-3xl sm:text-lg font-semibold text-white">{form.nama}</p>
-                <p className='sm:text-sm font-medium text-black italic text-white w-max mx-auto'>{form.role}</p>
+                <p className="text-3xl sm:text-lg font-semibold">{form.nama}</p>
+                <p className='sm:text-sm font-medium text-black italic w-max mx-auto'>{form.role}</p>
             </div>
             
             <div className='border border-gray-dark mb-4'></div>
             {
-              roleCheck == form.role ? 
-              <ul className='text-white ml-5 list-none'>
-                <li className='hover:font-semibold hover:cursor-pointer'>Home</li>
+              roleCheck === form.role ? 
+              <ul className='text-[#f8f9fa] ml-5 list-none'>
+                <Link to="/dashboard">
+                  <li className='hover:font-semibold hover:cursor-pointer'>Home</li>
+                </Link>
               </ul>  
               :
-              <ul className='text-white ml-5 list-none'>
-                <li className='hover:font-semibold hover:cursor-pointer'>Home</li>
-                <li className='hover:font-semibold hover:cursor-pointer'>Tour Package</li>
-                <li className='hover:font-semibold hover:cursor-pointer'>Transactions</li>
-                <li className='hover:font-semibold hover:cursor-pointer'>Manage Admin</li>
+              <ul className='text-[#f8f9fa] ml-5 list-none'>
+                <Link to="/dashboard">
+                  <li className='hover:font-semibold hover:cursor-pointer mb-1'>Home</li>
+                </Link>
+
+                <Link to="/tour-package">
+                  <li className='hover:font-semibold hover:cursor-pointer mb-1'>Tour Package</li>
+                </Link>
+                
+                <Link to="/transaction">
+                  <li className='hover:font-semibold hover:cursor-pointer mb-1'>Transactions</li>
+                </Link>
+                
+                <Link to="/manage-admin">
+                  <li className='hover:font-semibold hover:cursor-pointer'>Manage Admin</li>
+                </Link>
               </ul>  
             }
-
-              
-              
-            {/* </div> */}
-              
         </div>
-        <button className='text-white flex bg-gray-dark w-72 p-3 gap-3 justify-center absolute bottom-0' onClick={onClick}><FiLogOut className='stroke-white w-6 h-6'/>Logout</button>
+        <button className='text-white flex bg-gray-dark w-72 p-3 gap-3 justify-center' onClick={fetch}><FiLogOut className='stroke-white w-6 h-6'/>Logout</button>
     </div>
-    // </div>
+ </div>
   )
 }
 

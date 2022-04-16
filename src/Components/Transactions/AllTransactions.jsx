@@ -1,13 +1,7 @@
+import { Base64 } from 'js-base64';
 import React, { useEffect, useState } from 'react'
+import Cookies from 'universal-cookie';
 import { Axios } from '../../Helper/axios';
-import UserProfile from '../../Images/man.png'
-import { Base64 } from "js-base64";
-import Cookies from "universal-cookie";
-import { AiFillStar } from "react-icons/ai";
-
-import axios from 'axios';
-import Popup from '../Information/Popup';
-
 
 function GenerateAxiosConfig() {
   const cookies = new Cookies();
@@ -20,36 +14,32 @@ function GenerateAxiosConfig() {
   return config;
 }
 
-function ManageComment(props) {
-    const [review, setReview] = useState([]);
-    // const [messages, setMessages] = useState("");
-    // const [popup, setPopup] = useState(false)
+function AllTransactions() {
+  const [transaction, setTransaction] = useState([]);
 
     const fetch = async () => {
-        await Axios.get(`/review/all`,GenerateAxiosConfig()).then((resp) =>{
-            setReview(resp.data.data)
+        await Axios.get(`/transaction`, GenerateAxiosConfig()).then((resp) =>{
+            setTransaction(resp.data.data)
         })
     }
 
-    const rejectReview = (id) =>{
+    const rejectTransaction = (id) =>{
         Axios
-
-            .put(`/review/reject/${id}`)
-
+            .put(`/transaction/reject/${id}`)
             .then(() => {
-                alert("Review Paket Tidak di Published")
+                alert("Transaksi Ditolak")
             })
             .catch((err) => {
                 console.log(err)
             })
     }
 
-    const acceptReview = (id) =>{
+    const acceptTransaction = (id) =>{
         Axios
-            .put(`/review/accept/${id}`)
+            .put(`/transaction/accept/${id}`)
             .then((resp) =>{
                 console.log(resp)
-                alert("Review Paket Berhasil di Published")
+                alert("Transaksi Berhasil")
             })
             .catch((err) =>{
                 console.log(err)
@@ -58,37 +48,40 @@ function ManageComment(props) {
 
     useEffect(() =>{
         fetch();
-    }, [review])
+    }, [])
 
+    console.log("transaksi:",transaction)
     return (
-        <div className='w-full mx-auto mb-20'>
-            {/* <Popup show={popup} onHide={() => setPopup(false)} messages={messages}/> */}
-            <h1 className="text-3xl sm:text-4xl font-bold text-black mb-8">Manage Review</h1>
+        <div className='w-full mx-auto mb-20 mt-10'>
+            <h1 className="text-3xl sm:text-4xl font-bold text-black mb-8">Manage Transaction</h1>
             <div className='border border-gray-light mb-8'></div>
 
-
             <div className='bg-[#f1f3f5] rounded drop-shadow-lg border border-gray-light mb-5 w-full mx-auto'>
-                <table className='table-auto border-collapse  border-gray rounded-xl mb-8 w-full mx-auto text-[#495057]'>
+                <table className='table-auto border-collapse border-gray rounded-xl mb-8 w-full mx-auto text-[#495057]'>
                     <thead className=''>
                         <tr>
                             <th className='p-2'>Package</th>
                             <th>Customer</th>
-                            <th>Review</th>
-                            {/* <th>Rating</th> */}
+                            <th>Method Payment</th>
+                            <th>Pax</th>
+                            <th>Price</th>
+                            <th>Total</th>
                             <th>Status</th>
                             <th className='p-2'>Action</th>
                         </tr>
                     </thead>
                     <tbody className='bg-white'>
-                        {review?.map((item) =>(
+                        {transaction?.map((item) =>(
                         <tr key={item.id} className="">
                             <td className='p-2 border-b border-[#e9ecef] mb-8'>{item.nama_paket}</td>
                             <td className='border-b border-[#e9ecef] p-2'>{item.nama}</td>
-                            <td className='border-b border-[#e9ecef] p-2'>{item.review}</td>
-                            {/* <td className='flex items-center border-b p-2 mb-8'><AiFillStar className='fill-yellow'/>{item.stars}</td> */}
+                            <td className='border-b border-[#e9ecef] p-2'>{item.metode}</td>
+                            <td className='border-b border-[#e9ecef] p-2'>{item.pax}</td>
+                            <td className='border-b border-[#e9ecef] p-2'>{item.harga}</td>
+                            <td className='flex p-2 mt-2 text-center items-center'>{item.total}</td>
                             <td className='border-b border-[#e9ecef] mr-1 p-2'>
                                 {item.status === "Pending" ? 
-                                <div className='bg-gray text-white rounded-lg text-center p-1'>Pending</div>
+                                <div className='bg-gray text-white rounded-lg text-center'>Pending</div>
                                 :
                                 <div>
                                     {item.status === "Accepted"?
@@ -99,13 +92,12 @@ function ManageComment(props) {
                                 </div>
                                 }
                             </td>
-                            {/* <td>{item.status}</td> */}
-                            <td className='flex p-1 justify-center'>
+                            <td className='flex p-1'>
                                 {
                                 item.status === "Pending" ? 
-                                <div className='w-fit mt-1 mb-2'>
-                                    <button className=' bg-green text-white rounded-lg font-semibold mb-1 w-16'onClick={()=>{acceptReview(item.id);}}>Accept</button>
-                                    <button className=' bg-red text-white rounded-lg font-semibold w-16' onClick={()=> {rejectReview(item.id);}}>Reject</button>
+                                <div className='w-fit mt-1 mb-2 flex flex-col'>
+                                    <button className=' bg-green text-white rounded-lg font-semibold mb-1 w-16 mr-1'onClick={()=>acceptTransaction(item.id)}>Accept</button>
+                                    <button className=' bg-red text-white rounded-lg font-semibold w-16' onClick={()=>rejectTransaction(item.id)}>Reject</button>
                                 </div>
                                 : 
                                 null
@@ -114,11 +106,10 @@ function ManageComment(props) {
                         </tr>
                         ))}
                     </tbody>
-                </table>           
-
+                </table> 
             </div>
         </div>
     )
 }
 
-export default ManageComment
+export default AllTransactions
