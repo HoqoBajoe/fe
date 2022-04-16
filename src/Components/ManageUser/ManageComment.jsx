@@ -54,9 +54,8 @@ function ManageComment(props) {
 
     useEffect(() =>{
         fetch();
-    }, [])
+    }, [review])
 
-    console.log(review)
     return (
         <div className='w-full mx-auto mb-20'>
             {/* <Popup show={popup} onHide={() => setPopup(false)} messages={messages}/> */}
@@ -72,7 +71,7 @@ function ManageComment(props) {
                             <th>Review</th>
                             {/* <th>Rating</th> */}
                             <th>Status</th>
-                            <th></th>
+                            <th className='p-2'>Action</th>
                         </tr>
                     </thead>
                     <tbody className='bg-white'>
@@ -84,7 +83,7 @@ function ManageComment(props) {
                             {/* <td className='flex items-center border-b p-2 mb-8'><AiFillStar className='fill-yellow'/>{item.stars}</td> */}
                             <td className='border-b border-[#e9ecef] mr-1 p-2'>
                                 {item.status === "Pending" ? 
-                                <div className='bg-gray text-white rounded-lg text-center'>Pending</div>
+                                <div className='bg-gray text-white rounded-lg text-center p-1'>Pending</div>
                                 :
                                 <div>
                                     {item.status === "Accepted"?

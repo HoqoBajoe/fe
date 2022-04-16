@@ -53,7 +53,7 @@ function AllTransactions() {
     console.log("transaksi:",transaction)
     return (
         <div className='w-full mx-auto mb-20 mt-10'>
-            <h1 className="text-3xl sm:text-4xl font-bold text-black mb-8">Manage Review</h1>
+            <h1 className="text-3xl sm:text-4xl font-bold text-black mb-8">Manage Transaction</h1>
             <div className='border border-gray-light mb-8'></div>
 
             <div className='bg-[#f1f3f5] rounded drop-shadow-lg border border-gray-light mb-5 w-full mx-auto'>
@@ -63,9 +63,11 @@ function AllTransactions() {
                             <th className='p-2'>Package</th>
                             <th>Customer</th>
                             <th>Method Payment</th>
+                            <th>Pax</th>
+                            <th>Price</th>
                             <th>Total</th>
                             <th>Status</th>
-                            <th></th>
+                            <th className='p-2'>Action</th>
                         </tr>
                     </thead>
                     <tbody className='bg-white'>
@@ -74,7 +76,9 @@ function AllTransactions() {
                             <td className='p-2 border-b border-[#e9ecef] mb-8'>{item.nama_paket}</td>
                             <td className='border-b border-[#e9ecef] p-2'>{item.nama}</td>
                             <td className='border-b border-[#e9ecef] p-2'>{item.metode}</td>
-                            <td className='flex p-2 mt-2 text-center'>{item.total}</td>
+                            <td className='border-b border-[#e9ecef] p-2'>{item.pax}</td>
+                            <td className='border-b border-[#e9ecef] p-2'>{item.harga}</td>
+                            <td className='flex p-2 mt-2 text-center items-center'>{item.total}</td>
                             <td className='border-b border-[#e9ecef] mr-1 p-2'>
                                 {item.status === "Pending" ? 
                                 <div className='bg-gray text-white rounded-lg text-center'>Pending</div>
@@ -91,7 +95,7 @@ function AllTransactions() {
                             <td className='flex p-1'>
                                 {
                                 item.status === "Pending" ? 
-                                <div className='w-fit mt-1 mb-2'>
+                                <div className='w-fit mt-1 mb-2 flex flex-col'>
                                     <button className=' bg-green text-white rounded-lg font-semibold mb-1 w-16 mr-1'onClick={()=>acceptTransaction(item.id)}>Accept</button>
                                     <button className=' bg-red text-white rounded-lg font-semibold w-16' onClick={()=>rejectTransaction(item.id)}>Reject</button>
                                 </div>
