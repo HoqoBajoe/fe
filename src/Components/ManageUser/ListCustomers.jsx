@@ -58,7 +58,9 @@ function ListCustomers() {
             <div className='border border-gray-light mb-8'></div>
 
             {customer?.map((item) =>(
+
                 <div key={item.id} className='flex items-center justify-between gap-24 text-[#495057] bg-white rounded-md drop-shadow-lg hover:drop-shadow-2xl p-3 border border-gray-light w-max mx-auto mb-8'>
+
                     <div className='flex items-center'>
                         <img src={UserProfile} className='w-14 mr-4 '/>
                         <div className='w-60'>
@@ -68,7 +70,9 @@ function ListCustomers() {
                     </div>
                     
                     <p className='sm:text-lg font-medium text-black w-28'>{item.role == "user"? "Customer" : item.role}</p>
+
                     <p className='flex items-center sm:text-lg font-medium text-black w-28'><MdDateRange className='mr-1'/>{moment(item.created_at).format('L')}</p>
+
                     <button className='bg-red h-max p-2 rounded-lg' onClick={()=>deleteCust(item.id)}>
                         <FaTrashAlt className='fill-white w-5 h-5'/>
                     </button>

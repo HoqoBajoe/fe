@@ -4,8 +4,10 @@ import UserProfile from '../../Images/man.png'
 import { Base64 } from "js-base64";
 import Cookies from "universal-cookie";
 import { AiFillStar } from "react-icons/ai";
+
 import axios from 'axios';
 import Popup from '../Information/Popup';
+
 
 function GenerateAxiosConfig() {
   const cookies = new Cookies();
@@ -31,7 +33,9 @@ function ManageComment(props) {
 
     const rejectReview = (id) =>{
         Axios
+
             .put(`/review/reject/${id}`)
+
             .then(() => {
                 alert("Review Paket Tidak di Published")
             })
@@ -61,6 +65,7 @@ function ManageComment(props) {
             {/* <Popup show={popup} onHide={() => setPopup(false)} messages={messages}/> */}
             <h1 className="text-3xl sm:text-4xl font-bold text-black mb-8">Manage Review</h1>
             <div className='border border-gray-light mb-8'></div>
+
 
             <div className='bg-[#f1f3f5] rounded drop-shadow-lg border border-gray-light mb-5 w-full mx-auto'>
                 <table className='table-auto border-collapse  border-gray rounded-xl mb-8 w-full mx-auto text-[#495057]'>
@@ -110,6 +115,7 @@ function ManageComment(props) {
                         ))}
                     </tbody>
                 </table>           
+
             </div>
         </div>
     )

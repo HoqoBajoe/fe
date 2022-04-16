@@ -1,5 +1,6 @@
 import DashboardSuperAdmin from "./Pages/DashboardSuperAdmin";
 import HomePage from "./Pages/HomePage";
+import LoginPage from "./Pages/LoginPage";
 import {
   BrowserRouter ,
   Routes,
@@ -8,8 +9,8 @@ import {
 } from "react-router-dom";
 import { PersistGate } from "redux-persist/integration/react";
 import { Provider } from "react-redux";
-import Login from "./Components/Form/Login";
 import { store,persistor } from "./Redux/Store";
+import RegisterPage from "./Pages/RegsiterPage";
 import RegisUser from "./Components/Form/RegisUser";
 import MangeAdmin from "./Pages/MangeAdmin";
 import TourPackage from "./Pages/TourPackage";
@@ -24,6 +25,7 @@ function App() {
             <Routes>
               <Route path="/" element={<HomePage />} />
               <Route path="/dashboard" element={<DashboardSuperAdmin/>}/>
+
               <Route path="/login" element={<Login/>}/>
               <Route path="/register" element={<RegisUser/>}/>
 
@@ -31,6 +33,7 @@ function App() {
 
               <Route path="/tour-package" element={<TourPackage/>}/>
               <Route path="/transaction" element={<Transactions/>}/>
+
             </Routes>   
           </BrowserRouter>
         </PersistGate>

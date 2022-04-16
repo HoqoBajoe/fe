@@ -9,10 +9,12 @@ const Nav = () => {
     return (
         <div className='shadow-md w-full fixed top-0 left-0 md:bg-transparent nav'>
             <div className='md:flex items-center justify-between py-4 md:px-10 px-7 border-b border-white mx-7'>
-                <div className='font-bold text-2xl cursor-pointer flex items-center 
-                text-gray-800 text-white'>
-                    HoqoBajoe
-                </div>
+                <Link to={'/'}>
+                    <a className='font-bold text-2xl cursor-pointer flex items-center 
+                    text-gray-800 text-white'>
+                        HoqoBajoe
+                    </a>
+                </Link>
                 
                 <div onClick={()=>setOpen(!open)} className='text-3xl absolute right-8 top-6 cursor-pointer md:hidden'>
                     <ion-icon name={open ? 'close':'menu'}></ion-icon>
