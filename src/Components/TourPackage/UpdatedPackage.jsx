@@ -43,7 +43,7 @@ function UpdatedPackage(props) {
             .put(`/paket/update/${id}`,{...form, destinasi_wisata: destinasi, photo_wisata:gambar})
             .then((response) => {
                 console.log(response);
-                
+                alert("Data berhasil di Update")
             })
             .catch((error) => {
                 console.log(error)
@@ -73,7 +73,7 @@ function UpdatedPackage(props) {
                 <input type="number" name="harga" value={form.harga} onChange={onChange} className='border border-gray-light mb-3 p-1 w-full rounded-md'/><br/>
                 
                 <div className='flex justify-center'>
-                    <button type='submit' onClick={onSubmit} className='text-white bg-gray p-2 rounded-lg w-72 mt-5'>Add Package</button>
+                    <button type='submit' onClick={onSubmit} className='text-white bg-gray p-2 rounded-lg w-72 mt-5'>Update Package</button>
                 </div>
             </form>
         </div>

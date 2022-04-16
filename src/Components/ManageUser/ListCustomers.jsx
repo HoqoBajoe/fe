@@ -40,7 +40,7 @@ function ListCustomers() {
 
     useEffect(() =>{
         fetch();
-    }, [customer])
+    }, [])
 
     console.log(customer)
     return (
