@@ -24,3 +24,16 @@ CRUD paket wisata
 
 Add Admin
 List Admin
+
+
+16 april 2022
+
+#buat semua data nge fetch setiap ada perubahan tanpa melakukan refresh manual
+
+-home : tampilan tabel belum oke, sama request rejectnya belum bisa
+
+-manage admin : tampilan masih kurang, sama load dtanya masih perlu refresh manual
+
+-tour package: tampilannya masih kurang
+
+-transaction: get data bad request 404
