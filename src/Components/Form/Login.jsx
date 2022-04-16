@@ -6,6 +6,7 @@ import { Axios } from '../../Helper/axios';
 import { login } from '../../Redux/AdminSlice';
 import { Base64 } from "js-base64";
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 function Login() {
     const [form, setForm] = useState({
@@ -77,10 +78,12 @@ function Login() {
                         </form>
 
                         <div className='flex justify-center mt-10'>
-                            <button type='submit' onClick={onSubmit} className='text-white bg-gray p-2 rounded-lg w-72 mt-5 uppercase font-semibold shadow-md  hover:bg-gray-white'>Login</button>
+                            <button type='submit' onClick={onSubmit} className='text-white bg-gray p-2 rounded-lg w-72 mt-5 uppercase font-semibold shadow-md   hover:bg-gray-white'>Login</button>
                         </div>
                         <div className="flex justify-center mt-5 mb-5">
-                            <a href={'/register'} className="font-bold shadow-sm hover:shadow-lg hover:border-b-2 transition">Create Account</a>
+                            <Link to={'/register'}>
+                                <a className="font-bold shadow-sm hover:shadow-lg hover:border-b-2 transition">Create Account</a>
+                            </Link>
                         </div>
                     </div>
                 </div>

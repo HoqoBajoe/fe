@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { Axios } from '../../Helper/axios';
+import { Link } from 'react-router-dom';
 
 function RegisUser() {
     const [form, setForm] = useState({
@@ -49,7 +50,9 @@ function RegisUser() {
                             <button type='submit' onClick={onSubmit} className='text-white bg-gray p-2 rounded-lg w-72 mt-5 uppercase font-semibold shadow-md  hover:bg-gray-white'>Sign In</button>
                             </div>
                             <div className="flex justify-center mt-5 mb-5">
-                                <a href={'/login'} className="font-bold shadow-sm hover:shadow-lg hover:border-b-2 transition">Back To Login</a>
+                                <Link to={'/login'}>
+                                    <a className="font-bold shadow-sm hover:shadow-lg hover:border-b-2 transition">Back To Login</a>
+                                </Link>
                             </div>
                         </form>
                         </div>
