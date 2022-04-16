@@ -26,8 +26,8 @@ function App() {
               <Route path="/" element={<HomePage />} />
               <Route path="/dashboard" element={<DashboardSuperAdmin/>}/>
 
-              <Route path="/login" element={<Login/>}/>
-              <Route path="/register" element={<RegisUser/>}/>
+              <Route path="/login" element={<LoginPage/>}/>
+              <Route path="/register" element={<RegisterPage/>}/>
 
               <Route path="/manage-admin" element={<MangeAdmin/>}/>
 
