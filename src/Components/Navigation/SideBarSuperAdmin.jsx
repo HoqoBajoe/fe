@@ -42,7 +42,7 @@ function SideBarSuperAdmin() {
             
             <div className='border border-gray-dark mb-4'></div>
             {
-              roleCheck == form.role ? 
+              roleCheck === form.role ? 
               <ul className='text-white ml-5 list-none'>
                 <Link to="/dashboard">
                   <li className='hover:font-semibold hover:cursor-pointer'>Home</li>
@@ -57,8 +57,11 @@ function SideBarSuperAdmin() {
                 <Link to="/tour-package">
                   <li className='hover:font-semibold hover:cursor-pointer'>Tour Package</li>
                 </Link>
-
-                <li className='hover:font-semibold hover:cursor-pointer'>Transactions</li>
+                
+                <Link to="/transaction">
+                  <li className='hover:font-semibold hover:cursor-pointer'>Transactions</li>
+                </Link>
+                
                 <Link to="/manage-admin">
                   <li className='hover:font-semibold hover:cursor-pointer'>Manage Admin</li>
                 </Link>

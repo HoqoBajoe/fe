@@ -4,6 +4,7 @@ import UserProfile from '../../Images/man.png'
 import { Base64 } from "js-base64";
 import Cookies from "universal-cookie";
 import { AiFillStar } from "react-icons/ai";
+import axios from 'axios';
 
 function GenerateAxiosConfig() {
   const cookies = new Cookies();
@@ -26,7 +27,7 @@ function ManageComment() {
 
     const rejectReview = (id) =>{
         Axios
-            .delete(`/review/reject/${id}`)
+            .put(`/review/reject/${id}`)
             .then(() => {
                 alert("Berhasil menghapus customer")
             })
@@ -48,7 +49,7 @@ function ManageComment() {
 
     useEffect(() =>{
         fetch();
-    }, [setReview])
+    }, [review])
 
     console.log(review)
     return (

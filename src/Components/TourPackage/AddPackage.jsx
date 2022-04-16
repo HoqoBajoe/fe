@@ -35,6 +35,7 @@ function AddPackage() {
 
   return (
     <div>
+        <h1 className="text-3xl sm:text-4xl font-bold text-black">Add Package</h1>
         <form method='POST' action='#'>
             <h3 className="text-xl sm:text-xl font-medium text-black">Nama paket</h3>
             <input type="text" name="nama_paket" value={form.nama_paket} onChange={onChange} className='border border-gray-light mb-3 p-1 w-72 rounded-md'/><br/>
