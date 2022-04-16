@@ -53,6 +53,7 @@ function Login() {
                     e.preventDefault();
                     setError("Anda Belum terdaftar");
                 }
+                alert("Berhasil Login")
                 
             })
             .catch(err => setError("Anda Belum terdaftar"));

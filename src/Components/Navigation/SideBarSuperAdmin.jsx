@@ -37,7 +37,7 @@ function SideBarSuperAdmin() {
   const onClick = () => {
     
     dispatch(logout());
-    cookies.remove("token", { path: "/", domain: window.location.hostname });
+    cookies.remove("token", { path: "/dashboard", domain: window.location.hostname });
     if (window.location.pathname) {
       navigate("/");
     } else {

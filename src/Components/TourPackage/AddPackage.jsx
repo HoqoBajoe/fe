@@ -25,6 +25,13 @@ function AddPackage(props) {
             .then((response) => {
                 console.log(response);
                 alert('Berhasil menambah paket wisata')
+                setForm({
+                    nama_paket: "",
+                    destinasi_wisata: "",
+                    deskripsi:"",
+                    photo_wisata: "",
+                    harga: 0,
+                })
                 
             })
             .catch((error) => {

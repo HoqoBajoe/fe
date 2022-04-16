@@ -44,6 +44,13 @@ function UpdatedPackage(props) {
             .then((response) => {
                 console.log(response);
                 alert("Data berhasil di Update")
+                setForm({
+                    nama_paket: "",
+                    destinasi_wisata: "",
+                    deskripsi:"",
+                    photo_wisata: "",
+                    harga: 0,
+                })
             })
             .catch((error) => {
                 console.log(error)

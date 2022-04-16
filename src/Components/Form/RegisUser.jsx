@@ -21,6 +21,12 @@ function RegisUser() {
             .post(`/register`,{...form})
             .then((response) => {
                 console.log(response);
+                alert("Berhasil Regis")
+                setForm({
+                    nama: "",
+                    email: "",
+                    password: "", 
+                })
             })
             .catch((error) => {
                 console.log(error)
