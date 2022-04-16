@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { Base64 } from 'js-base64';
 import React, { useEffect, useState } from 'react'
 import Cookies from 'universal-cookie';
@@ -8,7 +9,9 @@ function GenerateAxiosConfig() {
   const token = Base64.decode(cookies.get("token"));
   const config = {
     headers: {
-      Authorization: "Bearer " + token,
+        Accept: "application/json",
+        "Content-Type": "application/json;charset=UTF-8",
+        Authorization: "Bearer " + token,
     },
   };
   return config;
@@ -18,7 +21,7 @@ function AllTransactions() {
   const [transaction, setTransaction] = useState([]);
 
     const fetch = async () => {
-        await Axios.get(`/transaction`, GenerateAxiosConfig()).then((resp) =>{
+        await axios.get(`http://hoqobajoe.herokuapp.com/api/transaction`, GenerateAxiosConfig()).then((resp) =>{
             setTransaction(resp.data.data)
         })
     }

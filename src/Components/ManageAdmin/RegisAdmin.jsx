@@ -1,18 +1,30 @@
 import React, { useState } from 'react'
 import { Axios } from '../../Helper/axios';
+import useValidateForm from '../../Hooks/useValidateForm';
 
 function RegisAdmin() {
+    const { validateForm } = useValidateForm
   const [form, setForm] = useState({
         nama: "",
         email: "",
         password: "",
     })
 
+    const [errorMsg, setErrorMsg] = useState({});
+
     const onChange = (e) => {
         const name = e.target.name;
         const value = e.target.value;
         setForm({ ...form, [name]: value });
     };
+
+    const onBlur = (e) => {
+    const name = e.target.name;
+    const value = e.target.value;
+    const messages = validateForm(name, value);
+    setErrorMsg({ ...errorMsg, ...messages });
+  };
+
 
     const onSubmit = (e) => {
         e.preventDefault();
@@ -21,9 +33,16 @@ function RegisAdmin() {
             .then((response) => {
                 console.log(response);
                 alert("Berhasil Register Admin")
+                setForm({
+                    nama: "",
+                    email: "",
+                    password: "",
+                })
             })
             .catch((error) => {
-                console.log(error)
+                setErrorMsg({
+                    ...errorMsg,
+                });
             })
     }
     return (
@@ -35,17 +54,18 @@ function RegisAdmin() {
                 <form method='POST' action='#'>
                     <div className='flex justify-between'>
                         <p className="text-xl font-medium">Nama</p>
-                        <input type="text" name="nama" value={form.nama} onChange={onChange} className='border border-gray-light mb-3 p-1 w-96 rounded'/>
+                        <input type="text" required name="nama" value={form.nama} onChange={onChange} className='border border-gray-light mb-3 p-1 w-96 rounded'/>
+                        
                     </div>
                     
                     <div className='flex justify-between'>
                         <p className="text-xl font-medium">Email</p>
-                        <input type="email" name="email" value={form.email} onChange={onChange} className='border border-gray-light mb-3 p-1 w-96 rounded'/>
+                        <input required type="email" name="email" value={form.email} onChange={onChange} className='border border-gray-light mb-3 p-1 w-96 rounded'/>
                     </div>
 
                     <div className='flex justify-between'>
                         <p className="text-xl font-medium">Password</p>
-                        <input type="password" name="password" value={form.password} onChange={onChange} className='border border-gray-light mb-3 p-1 w-96 rounded'/>
+                        <input required type="password" name="password" value={form.password} onChange={onChange} className='border border-gray-light mb-3 p-1 w-96 rounded'/>
                     </div>
                     
                     <div className='flex justify-center'>
