@@ -1,15 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import { Axios } from '../../Helper/axios';
-import UserProfile from '../../Images/man.png'
-import { Base64 } from "js-base64";
+import { Base64 } from "js-base64"
 import Cookies from "universal-cookie";
 import { AiFillStar } from "react-icons/ai";
-
-import axios from 'axios';
-import Popup from '../Information/Popup';
-
+import Swal from 'sweetalert2';
 
 function GenerateAxiosConfig() {
+
   const cookies = new Cookies();
   const token = Base64.decode(cookies.get("token"));
   const config = {
@@ -22,47 +19,62 @@ function GenerateAxiosConfig() {
 
 function ManageComment(props) {
     const [review, setReview] = useState([]);
-    // const [messages, setMessages] = useState("");
-    // const [popup, setPopup] = useState(false)
 
-    const fetch = async () => {
-        await Axios.get(`/review/all`,GenerateAxiosConfig()).then((resp) =>{
+    // const getReview = async () => {
+    //     await Axios.get(`/review/all`,GenerateAxiosConfig()).then((resp) =>{
+    //         setReview(resp.data.data)
+    //     })
+    // }
+    
+    const getReview = async () => {
+        await Axios.get(`/review/all`).then((resp) =>{
             setReview(resp.data.data)
         })
     }
 
     const rejectReview = (id) =>{
         Axios
-
             .put(`/review/reject/${id}`)
-
             .then(() => {
-                alert("Review Paket Tidak di Published")
+                Swal.fire(
+                    "Reject success!",
+                    "Review has been rejected!",
+                    'success'
+                )
             })
             .catch((err) => {
-                console.log(err)
+                Swal.fire(
+                    "Reject Failed!",
+                    "Something wrong, reject failed",
+                    'error'
+                )
             })
     }
-
     const acceptReview = (id) =>{
         Axios
             .put(`/review/accept/${id}`)
             .then((resp) =>{
-                console.log(resp)
-                alert("Review Paket Berhasil di Published")
+                Swal.fire(
+                    "Accept review success!",
+                    "Review has been published!",
+                    'success'
+                )
             })
             .catch((err) =>{
-                console.log(err)
+                Swal.fire(
+                    "Accept review failed!",
+                    "Something wrong, accept review failed",
+                    'error'
+                )
             })
     }
 
     useEffect(() =>{
-        fetch();
+        getReview();
     }, [review])
 
     return (
         <div className='w-full mx-auto mb-20'>
-            {/* <Popup show={popup} onHide={() => setPopup(false)} messages={messages}/> */}
             <h1 className="text-3xl sm:text-4xl font-bold text-black mb-8">Manage Review</h1>
             <div className='border border-gray-light mb-8'></div>
 
@@ -73,8 +85,8 @@ function ManageComment(props) {
                         <tr>
                             <th className='p-2'>Package</th>
                             <th>Customer</th>
+                            <th>Rating</th>
                             <th>Review</th>
-                            {/* <th>Rating</th> */}
                             <th>Status</th>
                             <th className='p-2'>Action</th>
                         </tr>
@@ -84,8 +96,8 @@ function ManageComment(props) {
                         <tr key={item.id} className="">
                             <td className='p-2 border-b border-[#e9ecef] mb-8'>{item.nama_paket}</td>
                             <td className='border-b border-[#e9ecef] p-2'>{item.nama}</td>
+                            <td className='border-b border-[#e9ecef] p-5 flex items-center'><AiFillStar className="fill-yellow mr-2"/> {item.stars} </td>
                             <td className='border-b border-[#e9ecef] p-2'>{item.review}</td>
-                            {/* <td className='flex items-center border-b p-2 mb-8'><AiFillStar className='fill-yellow'/>{item.stars}</td> */}
                             <td className='border-b border-[#e9ecef] mr-1 p-2'>
                                 {item.status === "Pending" ? 
                                 <div className='bg-gray text-white rounded-lg text-center p-1'>Pending</div>
@@ -99,7 +111,6 @@ function ManageComment(props) {
                                 </div>
                                 }
                             </td>
-                            {/* <td>{item.status}</td> */}
                             <td className='flex p-1 justify-center'>
                                 {
                                 item.status === "Pending" ? 

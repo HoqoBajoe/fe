@@ -11,10 +11,7 @@ function DashboardUser() {
                     Let's explore one of the third largest countries in the world, namedly Indonesia. enjoy your vacation packages at competitve prices and strong soul
                 </p>
             </div>
-        
-        
         </div>
-        
     </div>
   )
 }

@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Axios } from '../../Helper/axios';
 import { Link } from 'react-router-dom';
+import Swal from 'sweetalert2'
 
 function RegisUser() {
     const [form, setForm] = useState({
@@ -20,8 +21,11 @@ function RegisUser() {
         Axios
             .post(`/register`,{...form})
             .then((response) => {
-                console.log(response);
-                alert("Berhasil Regis")
+                Swal.fire(
+                    'Register Success!',
+                    'Please login..',
+                    'success'
+                )
                 setForm({
                     nama: "",
                     email: "",
@@ -29,7 +33,28 @@ function RegisUser() {
                 })
             })
             .catch((error) => {
-                console.log(error)
+                var res = error.response.data;
+
+                if (res.email) {
+                    Swal.fire(
+                        "Register Failed!",
+                        "Email sudah dipakai, tolong hubungi administrator",
+                        'error'
+                    )
+                }
+                if (res.password) {
+                    Swal.fire(
+                        "Register Failed!",
+                        "Password wajib 6 character",
+                        'error'
+                    )
+                }
+
+                Swal.fire(
+                    "Register Failed!",
+                    "Hubungi administrator!",
+                    'error'
+                )
             })
     }
     return (
@@ -53,7 +78,7 @@ function RegisUser() {
                                 <input type="password" name="password" value={form.password} onChange={onChange} className='w-full rounded-lg p-4 h-10 shadow-md leading-tight hover:shadow-lg transition'/>
                             </div>
                             <div className='flex justify-center mt-10'>
-                            <button type='submit' onClick={onSubmit} className='text-white bg-gray p-2 rounded-lg w-72 mt-5 uppercase font-semibold shadow-md  hover:bg-gray-white'>Sign In</button>
+                            <button type='submit' onClick={onSubmit} className='text-white bg-gray p-2 rounded-lg w-72 mt-5 uppercase font-semibold shadow-md  hover:bg-gray-white'>Sign Up</button>
                             </div>
                             <div className="flex justify-center mt-5 mb-5">
                                 <Link to={'/login'}>

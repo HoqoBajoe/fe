@@ -6,7 +6,7 @@ import { Axios } from '../../Helper/axios';
 import moment from "moment";
 import UpdatedPackage from './UpdatedPackage';
 import AddPackage from './AddPackage';
-
+import Swal from 'sweetalert2';
 
 function Modal(props) {
     return(
@@ -48,14 +48,29 @@ function AllPackage(props) {
         })
     }
 
+    const deleteTour = (id) => {
+        Axios 
+        .delete(`/paket/delete/${id}`)
+            .then(() => {
+                Swal.fire(
+                    'Success!',
+                    'Delete Tour Package success..',
+                    'success'
+                )
+            })
+            .catch((err) => {
+                Swal.fire(
+                    'Error!',
+                    'Delete Tour Package error!',
+                    'error'
+                )
+            })
+    }
+
     useEffect(() =>{
         fetchTour('');
-    }, [])
+    }, [tourPackage])
 
-    console.log(tourPackage)
-    // console.log(tourPackage.photo_wisata)
-    // console.log(stateId)
-    // console.log("add", modalShowAdd)
     return (
         <div className='w-full mx-auto mt-10'>
             <Modal show={modalShow} onHide={() => setModalShow(false)} id={stateId}/>
@@ -98,7 +113,7 @@ function AllPackage(props) {
                             <p className='sm:text-sm font-medium text-black italic'>{item.deskripsi.slice(0, 150)}</p>
                         </div>
                     </div>
-                    <ul className='w-48'>
+                    <ul className='w-40'>
                         {item.destinasi_wisata?.map((i) =>(
                             <li className='list-disc'>{i}</li>
                         ))}
@@ -107,6 +122,7 @@ function AllPackage(props) {
                     <button onClick={() => {setModalShow(true); setStateId(item.id)}} className='bg-gray p-2 rounded-md text-white' data-bs-toggle="modal" data-bs-target="#exampleModalCenter">
                         Edit
                     </button>
+                    <button onClick={()=>deleteTour(item.id)} className='bg-red p-2 rounded-md text-white'>Delete</button>
                 </div>
             ))}
         </div>

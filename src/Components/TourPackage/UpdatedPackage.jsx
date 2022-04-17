@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Axios } from '../../Helper/axios';
+import Swal from 'sweetalert2';
 
 function UpdatedPackage(props) {
     const { id }  = props
@@ -17,7 +18,7 @@ function UpdatedPackage(props) {
         setForm({ ...form, [name]: value });
     };
 
-    const fetch = async () => {
+    const getPackageByID = async () => {
         await Axios.get(`/paket/${id}`).then((resp) =>{
             setForm({
                 nama_paket: resp.data.data.nama_paket,
@@ -30,10 +31,11 @@ function UpdatedPackage(props) {
     }
 
     useEffect(() =>{
-        fetch();
-    }, [form])
+        getPackageByID();
+    }, [id])
 
-    console.log("form", form)
+    // console.log("form", form)
+
     const onSubmit = (e) => {
         e.preventDefault();
         const destinasi = form.destinasi_wisata.split(',');
@@ -43,6 +45,11 @@ function UpdatedPackage(props) {
             .put(`/paket/update/${id}`,{...form, destinasi_wisata: destinasi, photo_wisata:gambar})
             .then((response) => {
                 console.log(response);
+                Swal.fire(
+                    'Success!',
+                    'Update Tour Package success..',
+                    'success'
+                )
                 alert("Data berhasil di Update")
                 setForm({
                     nama_paket: "",
@@ -54,15 +61,17 @@ function UpdatedPackage(props) {
             })
             .catch((error) => {
                 console.log(error)
+                Swal.fire(
+                    'Failed!',
+                    'Update Tour Package failed..',
+                    'error'
+                )
             })
-        console.log(destinasi);
-        console.log(gambar);
     }
 
     console.log(id)
     return (
         <div>
-            {/* <h1 className="text-3xl sm:text-4xl font-bold text-black">Update Package</h1> */}
             <form method='PUT' action='#'>
                 <h3 className="text-xl sm:text-lg font-medium text-black">Nama paket</h3>
                 <input type="text" name="nama_paket" value={form.nama_paket} onChange={onChange} className='border border-gray-light mb-3 p-1 w-full rounded-md'/><br/>

@@ -40,6 +40,7 @@ function AddPackage(props) {
         console.log(destinasi);
         console.log(gambar);
     }
+    console.log("ini form add => ",form);
 
   return (
     <div>
