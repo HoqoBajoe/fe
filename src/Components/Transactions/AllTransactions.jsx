@@ -3,37 +3,46 @@ import { Base64 } from 'js-base64';
 import React, { useEffect, useState } from 'react'
 import Cookies from 'universal-cookie';
 import { Axios } from '../../Helper/axios';
+import Swal from 'sweetalert2';
 
 function GenerateAxiosConfig() {
-  const cookies = new Cookies();
-  const token = Base64.decode(cookies.get("token"));
-  const config = {
-    headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json;charset=UTF-8",
-        Authorization: "Bearer " + token,
-    },
-  };
-  return config;
-}
-
+    const cookies = new Cookies();
+    const token = Base64.decode(cookies.get("token"));
+    const config = {
+      headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json;charset=UTF-8",
+          Authorization: "Bearer " + token,
+      },
+    };
+    return config;
+  }
 function AllTransactions() {
-  const [transaction, setTransaction] = useState([]);
+    const [transaction, setTransaction] = useState([]);
 
     const fetch = async () => {
-        await axios.get(`https://hoqobajoe.herokuapp.com/api/transaction`, GenerateAxiosConfig()).then((resp) =>{
+        await Axios.get(`/transaction`).then((resp) =>{
             setTransaction(resp.data.data)
         })
     }
-
+    
     const rejectTransaction = (id) =>{
         Axios
             .put(`/transaction/reject/${id}`)
             .then(() => {
-                alert("Transaksi Ditolak")
+                Swal.fire(
+                    'Transaction rejected success',
+                    'Transaction has been rejected..',
+                    'success'
+                )
             })
             .catch((err) => {
                 console.log(err)
+                Swal.fire(
+                    'Transaction rejected error',
+                    'Transaction has been rejected error..',
+                    'error'
+                )
             })
     }
 
@@ -41,11 +50,18 @@ function AllTransactions() {
         Axios
             .put(`/transaction/accept/${id}`)
             .then((resp) =>{
-                console.log(resp)
-                alert("Transaksi Berhasil")
+                Swal.fire(
+                    'Transaction accepted success',
+                    'Transaction has been accepted..',
+                    'success'
+                )
             })
             .catch((err) =>{
-                console.log(err)
+                Swal.fire(
+                    'Transaction accepted error',
+                    'Transaction has been accepted error..',
+                    'error'
+                )
             })
     }
 
@@ -53,7 +69,6 @@ function AllTransactions() {
         fetch();
     }, [])
 
-    console.log("transaksi:",transaction)
     return (
         <div className='w-full mx-auto mb-20 mt-10'>
             <h1 className="text-3xl sm:text-4xl font-bold text-black mb-8">Manage Transaction</h1>

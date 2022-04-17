@@ -6,6 +6,7 @@ import { login } from '../../Redux/AdminSlice';
 import { Base64 } from 'js-base64';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import Swal from 'sweetalert2'
 
 function Login() {
     const [form, setForm] = useState({
@@ -29,7 +30,6 @@ function Login() {
         axios
             .post('https://hoqobajoe.herokuapp.com/api/login',{...form})
             .then((resp) =>{
-                console.log("ini respon: ", resp)
                 const hash = Base64.encode(resp.data.data.token);
                 cookies.set("token", hash, {
                 path: "/dashboard",
@@ -51,11 +51,26 @@ function Login() {
                 } else {
                     e.preventDefault();
                     setError("Anda Belum terdaftar");
+                    Swal.fire(
+                        "Login Failed!",
+                        "Wrong Email/Password",
+                        'error'
+                    )
                 }
-                alert("Berhasil Login")
-                
+                Swal.fire(
+                    'Login Success!',
+                    'Welcome to HoqoBajoe..',
+                    'success'
+                )
             })
-            .catch(err => setError("Anda Belum terdaftar"));
+            .catch(err => {
+                Swal.fire(
+                    "Login Failed!",
+                    "Wrong Email/Password",
+                    'error'
+                )
+                setError("Anda Belum terdaftar")}
+            );
     }
     
   

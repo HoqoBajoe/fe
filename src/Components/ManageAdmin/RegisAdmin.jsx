@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Axios } from '../../Helper/axios';
 import useValidateForm from '../../Hooks/useValidateForm';
+import Swal from 'sweetalert2';
 
 function RegisAdmin() {
     const { validateForm } = useValidateForm
@@ -19,10 +20,10 @@ function RegisAdmin() {
     };
 
     const onBlur = (e) => {
-    const name = e.target.name;
-    const value = e.target.value;
-    const messages = validateForm(name, value);
-    setErrorMsg({ ...errorMsg, ...messages });
+        const name = e.target.name;
+        const value = e.target.value;
+        const messages = validateForm(name, value);
+        setErrorMsg({ ...errorMsg, ...messages });
   };
 
 
@@ -32,7 +33,11 @@ function RegisAdmin() {
             .post(`/admin/create`,{...form})
             .then((response) => {
                 console.log(response);
-                alert("Berhasil Register Admin")
+                Swal.fire(
+                    'Add admin success!',
+                    'Register new admin successfully..',
+                    'success'
+                )
                 setForm({
                     nama: "",
                     email: "",
@@ -43,6 +48,11 @@ function RegisAdmin() {
                 setErrorMsg({
                     ...errorMsg,
                 });
+                Swal.fire(
+                    'Add admin error!',
+                    'Register new admin error..',
+                    'error'
+                )
             })
     }
     return (
@@ -55,9 +65,7 @@ function RegisAdmin() {
                     <div className='flex justify-between'>
                         <p className="text-xl font-medium">Nama</p>
                         <input type="text" required name="nama" value={form.nama} onChange={onChange} className='border border-gray-light mb-3 p-1 w-96 rounded'/>
-                        
                     </div>
-                    
                     <div className='flex justify-between'>
                         <p className="text-xl font-medium">Email</p>
                         <input required type="email" name="email" value={form.email} onChange={onChange} className='border border-gray-light mb-3 p-1 w-96 rounded'/>

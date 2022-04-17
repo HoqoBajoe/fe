@@ -3,8 +3,10 @@ import { Axios } from '../../Helper/axios';
 import { Base64 } from "js-base64"
 import Cookies from "universal-cookie";
 import { AiFillStar } from "react-icons/ai";
+import Swal from 'sweetalert2';
 
 function GenerateAxiosConfig() {
+
   const cookies = new Cookies();
   const token = Base64.decode(cookies.get("token"));
   const config = {
@@ -18,39 +20,57 @@ function GenerateAxiosConfig() {
 function ManageComment(props) {
     const [review, setReview] = useState([]);
 
-    const fetch = async () => {
-        await Axios.get(`/review/all`,GenerateAxiosConfig()).then((resp) =>{
+    // const getReview = async () => {
+    //     await Axios.get(`/review/all`,GenerateAxiosConfig()).then((resp) =>{
+    //         setReview(resp.data.data)
+    //     })
+    // }
+    
+    const getReview = async () => {
+        await Axios.get(`/review/all`).then((resp) =>{
             setReview(resp.data.data)
         })
     }
 
     const rejectReview = (id) =>{
         Axios
-
             .put(`/review/reject/${id}`)
-
             .then(() => {
-                alert("Review Paket Tidak di Published")
+                Swal.fire(
+                    "Reject success!",
+                    "Review has been rejected!",
+                    'success'
+                )
             })
             .catch((err) => {
-                console.log(err)
+                Swal.fire(
+                    "Reject Failed!",
+                    "Something wrong, reject failed",
+                    'error'
+                )
             })
     }
-
     const acceptReview = (id) =>{
         Axios
             .put(`/review/accept/${id}`)
             .then((resp) =>{
-                console.log(resp)
-                alert("Review Paket Berhasil di Published")
+                Swal.fire(
+                    "Accept review success!",
+                    "Review has been published!",
+                    'success'
+                )
             })
             .catch((err) =>{
-                console.log(err)
+                Swal.fire(
+                    "Accept review failed!",
+                    "Something wrong, accept review failed",
+                    'error'
+                )
             })
     }
 
     useEffect(() =>{
-        fetch();
+        getReview();
     }, [review])
 
     return (

@@ -5,7 +5,6 @@ import { FiLogOut } from "react-icons/fi";
 import { logout } from '../../Redux/AdminSlice';
 import Cookies from 'universal-cookie';
 import { Link, useNavigate } from 'react-router-dom';
-import { Axios } from '../../Helper/axios';
 
 function Sidebar() {
   const user = useSelector((state) => state.admin)
@@ -13,18 +12,15 @@ function Sidebar() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-   const fetch = async () => {
-        await Axios.get(`/logout`)
-          .then((resp) =>{
-            dispatch(logout());
-            cookies.remove("token", { path: "/", domain: window.location.hostname });
-            if (window.location.pathname) {
-              navigate("/");
-            } else {
-              window.location.reload();
-            }
-        })
+  const onClick = () => {
+    dispatch(logout());
+    cookies.remove("token", { path: "/dashboard", domain: window.location.hostname });
+    if (window.location.pathname) {
+      navigate("/");
+    } else {
+      window.location.reload();
     }
+  };
 
   return (
     <div className='sticky top-0 h-screen'>
@@ -68,7 +64,7 @@ function Sidebar() {
               </ul>  
             }
         </div>
-        <button className='text-white flex bg-gray-dark w-72 p-3 gap-3 justify-center' onClick={fetch}><FiLogOut className='stroke-white w-6 h-6'/>Logout</button>
+        <button className='text-white flex bg-gray-dark w-72 p-3 gap-3 justify-center' onClick={onClick}><FiLogOut className='stroke-white w-6 h-6'/>Logout</button>
     </div>
  </div>
   )
