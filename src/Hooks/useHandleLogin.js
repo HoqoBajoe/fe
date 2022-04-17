@@ -12,16 +12,10 @@ export default function useHandleLogin() {
   const navigate = useNavigate();
 
   const handleLogin = async (res) => {
-    // const API_URL = "https://hoqobajoe.herokuapp.com";
     let userData = {
       ...res,
     };
     delete userData.token;
-    // const config = {
-    //   headers: {
-    //     Authorization: "Bearer " + res.token,
-    //   },
-    // };
     await Axios
       .get(`/login`)
       .then((resp) => {

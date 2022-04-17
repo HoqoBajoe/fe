@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import HomeUser from '../Components/Card/HomeUser'
 import Info from '../Components/Information/Info'
 import { AiOutlineLine } from "react-icons/ai";
@@ -8,9 +8,13 @@ import DashboardUser from '../Components/Information/DashboardUser';
 import Nav from '../Components/Navigation/Nav';
 
 function HomePage() {
+
+  useEffect(() => {
+    document.title = "HoqoBajoe"
+  }, [])
+  
   return (
     <div>
-      {/* <Navbar/> */}
       <Nav/>  
       <DashboardUser/>
       <div className='sm:max-w-fit mx-auto'>

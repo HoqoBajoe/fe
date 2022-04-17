@@ -15,6 +15,7 @@ import TourPackage from "./Pages/TourPackage";
 import Transactions from "./Pages/Transactions";
 
 function App() {
+
   return (
     <div className="App">
       <Provider store={store}>
@@ -22,13 +23,12 @@ function App() {
           <BrowserRouter>
             <Routes>
               <Route path="/" element={<HomePage />} />
-              <Route path="/dashboard" element={<Dashboard/>}/>
               <Route path="/login" element={<LoginPage/>}/>
               <Route path="/register" element={<RegisterPage/>}/>
+              <Route path="/dashboard" element={<Dashboard/>}/>
               <Route path="/manage-admin" element={<ManageAdmin/>}/>
               <Route path="/tour-package" element={<TourPackage/>}/>
               <Route path="/transaction" element={<Transactions/>}/>
-
             </Routes>   
           </BrowserRouter>
         </PersistGate>

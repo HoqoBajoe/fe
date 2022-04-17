@@ -5,6 +5,7 @@ import { FiLogOut } from "react-icons/fi";
 import { logout } from '../../Redux/AdminSlice';
 import Cookies from 'universal-cookie';
 import { Link, useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 function Sidebar() {
   const user = useSelector((state) => state.admin)
@@ -15,6 +16,12 @@ function Sidebar() {
   const onClick = () => {
     dispatch(logout());
     cookies.remove("token", { path: "/dashboard", domain: window.location.hostname });
+    sessionStorage.removeItem('token');
+    Swal.fire(
+      "Logout success!",
+      "Redirecting to Homepage..",
+      'success'
+    )
     if (window.location.pathname) {
       navigate("/");
     } else {
@@ -64,10 +71,10 @@ function Sidebar() {
               </ul>  
             }
         </div>
-        <button className='text-white flex bg-gray-dark w-72 p-3 gap-3 justify-center' onClick={onClick}><FiLogOut className='stroke-white w-6 h-6'/>Logout</button>
+        <button className='text-white flex bg-gray-dark w-72 p-3 gap-3 justify-center' onClick={onClick}> <FiLogOut className='stroke-white w-6 h-6'/>Logout</button>
+     </div>
     </div>
- </div>
-  )
-}
+    )
+  }
 
 export default Sidebar
