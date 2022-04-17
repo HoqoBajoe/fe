@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Axios } from '../../Helper/axios';
+import Swal from 'sweetalert2';
 
 function UpdatedPackage(props) {
     const { id }  = props
@@ -17,7 +18,7 @@ function UpdatedPackage(props) {
         setForm({ ...form, [name]: value });
     };
 
-    const fetch = async () => {
+    const getPackageByID = async () => {
         await Axios.get(`/paket/${id}`).then((resp) =>{
             setForm({
                 nama_paket: resp.data.data.nama_paket,
@@ -30,31 +31,41 @@ function UpdatedPackage(props) {
     }
 
     useEffect(() =>{
-        fetch();
+        getPackageByID();
     }, [id])
 
-    console.log("form", form)
+
     const onSubmit = (e) => {
         e.preventDefault();
-            const destinasi = form.destinasi_wisata.split(',');
-            const gambar = form.photo_wisata.split(',');
-            Axios
-                .put(`/paket/update/${id}`,{...form, destinasi_wisata: destinasi, photo_wisata:gambar})
-                .then((response) => {
-                    console.log(response);
-                    alert("Data berhasil di Update")
-                    setForm({
-                        nama_paket: "",
-                        destinasi_wisata: "",
-                        deskripsi:"",
-                        photo_wisata: "",
-                        harga: 0,
-                    })
-                })
-                .catch((error) => {
-                    console.log(error)
-                })
+        const destinasi = form.destinasi_wisata.split(',');
+        const gambar = form.photo_wisata.split(',');
         
+        Axios
+            .put(`/paket/update/${id}`,{...form, destinasi_wisata: destinasi, photo_wisata:gambar})
+            .then((response) => {
+                console.log(response);
+                Swal.fire(
+                    'Success!',
+                    'Update Tour Package success..',
+                    'success'
+                )
+                alert("Data berhasil di Update")
+                setForm({
+                    nama_paket: "",
+                    destinasi_wisata: "",
+                    deskripsi:"",
+                    photo_wisata: "",
+                    harga: 0,
+                })
+            })
+            .catch((error) => {
+                console.log(error)
+                Swal.fire(
+                    'Failed!',
+                    'Update Tour Package failed..',
+                    'error'
+                )
+            })
     }
 
     console.log(id)

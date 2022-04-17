@@ -2,11 +2,11 @@ import React, { useState } from 'react'
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import Cookies from 'universal-cookie';
-import { Axios } from '../../Helper/axios';
 import { login } from '../../Redux/AdminSlice';
-import { Base64 } from "js-base64";
+import { Base64 } from 'js-base64';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import Swal from 'sweetalert2'
 
 function Login() {
     const [form, setForm] = useState({
@@ -62,15 +62,12 @@ function Login() {
             axios
             .post('https://hoqobajoe.herokuapp.com/api/login',{...form})
             .then((resp) =>{
-                console.log("ini respon: ", resp)
                 const hash = Base64.encode(resp.data.data.token);
                 cookies.set("token", hash, {
                 path: "/dashboard",
                 domain: window.location.hostname,
                 });
-
-                if (resp.data.data.role == 'super-admin' || resp.data.data.role == 'admin'){
-                    dispatch(
+                dispatch(
                         login({
                             id: resp.data.data.id,
                             nama: resp.data.data.nama,
@@ -80,17 +77,26 @@ function Login() {
                         }) 
                     )
                     sessionStorage.setItem('token', resp.data.data.token)
-                    navigate("/dashboard")
-                } else {
-                    e.preventDefault();
-                    // setError("Anda Belum terdaftar");
-                }
-                alert("Berhasil Login")
-                
-            })
-            .catch(err => console.log(err));
+                    Swal.fire(  
+                        'Login Success!',
+                        'Welcome to HoqoBajoe..',
+                        'success'
+                        )
+                    if (resp.data.data.role === 'super-admin' || resp.data.data.role === 'admin'){
+                        navigate("/dashboard")
+                    } else {
+                        navigate('/')
+                    }
+                    })
+            .catch(err => {
+                Swal.fire(
+                    "Login Failed!",
+                    "Wrong Email/Password",
+                    'error'
+                )
+            }
+            );
         }
-        
     }
     
     return (
@@ -116,19 +122,17 @@ function Login() {
                                 </div>
                             </div>
                         </form>
-
                         <div className='flex justify-center mt-10'>
                             <button type='submit' onClick={onSubmit} className='text-white bg-gray p-2 rounded-lg w-72 mt-5 uppercase font-semibold shadow-md   hover:bg-gray-white'>Login</button>
                         </div>
                         <div className="flex justify-center mt-5 mb-5">
                             <Link to={'/register'}>
-                                <a className="font-bold shadow-sm hover:shadow-lg hover:border-b-2 transition">Create Account</a>
+                                <a href="!#" className="font-bold shadow-sm hover:shadow-lg hover:border-b-2 transition">Create Account</a>
                             </Link>
                         </div>
                     </div>
                 </div>
             </div>
-        
         </div>
     )
 }

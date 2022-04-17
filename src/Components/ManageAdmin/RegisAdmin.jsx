@@ -1,10 +1,6 @@
 import React, { useState } from 'react'
-import { useForm } from 'react-hook-form';
 import { Axios } from '../../Helper/axios';
-import useValidateForm from '../../Hooks/useValidateForm';
-import * as yup from 'yup';
-import { yupResolver } from '@hookform/resolvers/yup';
-
+import Swal from 'sweetalert2';
 
 function RegisAdmin() {
     
@@ -13,8 +9,6 @@ function RegisAdmin() {
         email: "",
         password: "",
     })
-
-    // const
 
     const [errorMsg, setErrorMsg] = useState({
         nameError: "",
@@ -72,7 +66,11 @@ function RegisAdmin() {
             .post(`/admin/create`,{...form})
             .then((response) => {
                 console.log(response);
-                alert("Berhasil Register Admin")
+                Swal.fire(
+                    'Add admin success!',
+                    'Register new admin successfully..',
+                    'success'
+                )
                 setForm({
                     nama: "",
                     email: "",
@@ -89,10 +87,14 @@ function RegisAdmin() {
                     ...errorMsg,
                     auth: error.response.data.errors[0],
                 });
+                Swal.fire(
+                    'Add admin error!',
+                    'Register new admin error..',
+                    'error'
+                )
             })
         }
         
-        // }
     }
     console.log(errorMsg)
     return (
@@ -116,7 +118,6 @@ function RegisAdmin() {
                         </div>
                         
                     </div>
-                    
                     <div className='flex justify-between'>
                         <p className="text-xl font-medium">Email</p>
                         <div className='mb-3'>

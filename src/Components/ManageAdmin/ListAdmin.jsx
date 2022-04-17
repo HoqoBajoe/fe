@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from 'react'
-import { FiSearch } from "react-icons/fi";
 import { MdDateRange } from "react-icons/md";
 import UserProfile from '../../Images/man.png'
 import { Axios } from '../../Helper/axios';
 import moment from "moment";
-import RegisAdmin from "./RegisAdmin"
 
 
 function ListAdmin() {
@@ -29,11 +27,10 @@ function ListAdmin() {
             
             <div className='border border-gray-light mb-8'></div>
             
-
             {admin?.map((item) =>(
                 <div key={item.id} className='flex items-center justify-between gap-24  text-[#495057] bg-white rounded-md drop-shadow-lg hover:drop-shadow-2xl p-3 border border-gray-light w-max mx-auto mb-8'>
                     <div className='flex items-center'>
-                        <img src={UserProfile} className='w-14 mr-4 '/>
+                        <img src={UserProfile} alt="img-user" className='w-14 mr-4'/>
                         <div className='w-60'>
                             <p className="text-3xl sm:text-lg font-semibold text-black">{item.nama}</p>
                             <p className='sm:text-sm font-medium text-black italic'>{item.email}</p>

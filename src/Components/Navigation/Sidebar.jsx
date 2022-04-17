@@ -1,18 +1,19 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import UserProfile from '../../Images/man.png'
 import { FiLogOut } from "react-icons/fi";
 import { logout } from '../../Redux/AdminSlice';
 import Cookies from 'universal-cookie';
 import { Link, useNavigate } from 'react-router-dom';
-import { Axios } from '../../Helper/axios';
+import Swal from 'sweetalert2';
 
-function SideBarSuperAdmin() {
+function Sidebar() {
   const user = useSelector((state) => state.admin)
   const cookies = new Cookies();
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+<<<<<<< HEAD:src/Components/Navigation/SideBarSuperAdmin.jsx
   const initialValue = {
     nama: user.nama,
     role: user.role,
@@ -39,6 +40,17 @@ function SideBarSuperAdmin() {
     dispatch(logout());
     cookies.remove("token", { path: "/dashboard", domain: window.location.hostname });
     
+=======
+  const onClick = () => {
+    dispatch(logout());
+    cookies.remove("token", { path: "/dashboard", domain: window.location.hostname });
+    sessionStorage.removeItem('token');
+    Swal.fire(
+      "Logout success!",
+      "Redirecting to Homepage..",
+      'success'
+    )
+>>>>>>> e91b020478caf80c1fcb25be76ccbceab43999af:src/Components/Navigation/Sidebar.jsx
     if (window.location.pathname) {
       navigate("/");
     } else {
@@ -50,15 +62,19 @@ function SideBarSuperAdmin() {
     <div className='sticky top-0 h-screen'>
     <div className='w-72 h-screen bg-gray flex flex-col justify-between'>
         <div className='pt-4 p-2 text-[#f8f9fa]'>
-            <img src={UserProfile} className='w-14 h-14 mx-auto mb-4'/>
+            <img src={UserProfile} alt="" className='w-14 h-14 mx-auto mb-4'/>
             <div className='w-max mx-auto mb-2'>
-                <p className="text-3xl sm:text-lg font-semibold">{form.nama}</p>
-                <p className='sm:text-sm font-medium text-black italic w-max mx-auto'>{form.role}</p>
+                <p className="text-3xl sm:text-lg font-semibold">{user.nama}</p>
+                { user.role === 'super-admin' ? 
+                  <p className='sm:text-sm font-medium text-black italic w-max mx-auto'>Super Admin</p>
+                 :
+                  <p className='sm:text-sm font-medium text-black italic w-max mx-auto'>Admin</p>
+                } 
             </div>
             
             <div className='border border-gray-dark mb-4'></div>
             {
-              roleCheck === form.role ? 
+              user.role === 'admin' ? 
               <ul className='text-[#f8f9fa] ml-5 list-none'>
                 <Link to="/dashboard">
                   <li className='hover:font-semibold hover:cursor-pointer'>Home</li>
@@ -84,10 +100,14 @@ function SideBarSuperAdmin() {
               </ul>  
             }
         </div>
+<<<<<<< HEAD:src/Components/Navigation/SideBarSuperAdmin.jsx
         <button className='text-white flex bg-gray-dark w-72 p-3 gap-3 justify-center' onClick={onClick}><FiLogOut className='stroke-white w-6 h-6'/>Logout</button>
+=======
+        <button className='text-white flex bg-gray-dark w-72 p-3 gap-3 justify-center' onClick={onClick}> <FiLogOut className='stroke-white w-6 h-6'/>Logout</button>
+     </div>
+>>>>>>> e91b020478caf80c1fcb25be76ccbceab43999af:src/Components/Navigation/Sidebar.jsx
     </div>
- </div>
-  )
-}
+    )
+  }
 
-export default SideBarSuperAdmin
+export default Sidebar

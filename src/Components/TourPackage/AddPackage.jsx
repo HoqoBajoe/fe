@@ -84,6 +84,7 @@ function AddPackage(props) {
             })
         }
     }
+    console.log("ini form add => ",form);
 
   return (
     <div>
