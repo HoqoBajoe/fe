@@ -34,7 +34,6 @@ function UpdatedPackage(props) {
         getPackageByID();
     }, [id])
 
-    // console.log("form", form)
 
     const onSubmit = (e) => {
         e.preventDefault();

@@ -14,8 +14,6 @@ function Login() {
         password: "",
     })
 
-    const [error, setError] = useState("");
-
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const cookies = new Cookies();
@@ -35,9 +33,7 @@ function Login() {
                 path: "/dashboard",
                 domain: window.location.hostname,
                 });
-
-                if (resp.data.data.role === 'super-admin' || resp.data.data.role === 'admin'){
-                    dispatch(
+                dispatch(
                         login({
                             id: resp.data.data.id,
                             nama: resp.data.data.nama,
@@ -47,33 +43,27 @@ function Login() {
                         }) 
                     )
                     sessionStorage.setItem('token', resp.data.data.token)
-                    navigate("/dashboard")
-                } else {
-                    e.preventDefault();
-                    setError("Anda Belum terdaftar");
-                    Swal.fire(
-                        "Login Failed!",
-                        "Wrong Email/Password",
-                        'error'
-                    )
-                }
-                Swal.fire(
-                    'Login Success!',
-                    'Welcome to HoqoBajoe..',
-                    'success'
-                )
-            })
+                    Swal.fire(  
+                        'Login Success!',
+                        'Welcome to HoqoBajoe..',
+                        'success'
+                        )
+                    if (resp.data.data.role === 'super-admin' || resp.data.data.role === 'admin'){
+                        navigate("/dashboard")
+                    } else {
+                        navigate('/')
+                    }
+                    })
             .catch(err => {
                 Swal.fire(
                     "Login Failed!",
                     "Wrong Email/Password",
                     'error'
                 )
-                setError("Anda Belum terdaftar")}
+            }
             );
     }
     
-  
     return (
         <div className='static'>
             <div className="bg-home h-screen bg-cover bg-no-repeat flex">
@@ -90,7 +80,6 @@ function Login() {
                                 <input type="password" name="password" value={form.password} onChange={onChange} className='w-full rounded-lg p-4 h-10 shadow-md leading-tight hover:shadow-lg transition'/>
                             </div>
                         </form>
-
                         <div className='flex justify-center mt-10'>
                             <button type='submit' onClick={onSubmit} className='text-white bg-gray p-2 rounded-lg w-72 mt-5 uppercase font-semibold shadow-md   hover:bg-gray-white'>Login</button>
                         </div>
@@ -102,7 +91,6 @@ function Login() {
                     </div>
                 </div>
             </div>
-            
         </div>
     )
 }
