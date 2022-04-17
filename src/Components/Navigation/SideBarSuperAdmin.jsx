@@ -21,23 +21,24 @@ function SideBarSuperAdmin() {
   const [form, setForm] = useState(initialValue)
   const roleCheck = "admin"
 
-   const fetch = async () => {
-        await Axios.get(`/logout`)
-          .then((resp) =>{
-            dispatch(logout());
-            cookies.remove("token", { path: "/", domain: window.location.hostname });
-            if (window.location.pathname) {
-              navigate("/");
-            } else {
-              window.location.reload();
-            }
-        })
-    }
+  //  const fetch = async () => {
+  //       await Axios.get(`/logout`)
+  //         .then((resp) =>{
+  //           dispatch(logout());
+  //           cookies.remove("token", { path: "/", domain: window.location.hostname });
+  //           if (window.location.pathname) {
+  //             navigate("/");
+  //           } else {
+  //             window.location.reload();
+  //           }
+  //       })
+  //   }
 
   const onClick = () => {
-    
+    sessionStorage.removeItem('token');
     dispatch(logout());
     cookies.remove("token", { path: "/dashboard", domain: window.location.hostname });
+    
     if (window.location.pathname) {
       navigate("/");
     } else {
@@ -83,7 +84,7 @@ function SideBarSuperAdmin() {
               </ul>  
             }
         </div>
-        <button className='text-white flex bg-gray-dark w-72 p-3 gap-3 justify-center' onClick={fetch}><FiLogOut className='stroke-white w-6 h-6'/>Logout</button>
+        <button className='text-white flex bg-gray-dark w-72 p-3 gap-3 justify-center' onClick={onClick}><FiLogOut className='stroke-white w-6 h-6'/>Logout</button>
     </div>
  </div>
   )

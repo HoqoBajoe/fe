@@ -1,17 +1,10 @@
-import React from 'react'
-
 export default function useValidateForm() {
   const validateForm = (name, value, formValue = undefined) => {
     const regexName = /^[a-zA-Z ]{3,}$/;
     const regexNumber = /^[0-9]*$/;
-    const regexString = / ^(([A-Za-z]+[,.]?[ ]?|[a-z]+['-]?)+)$ /;
-    const regexDob =
-      /^([0-2][0-9]|(3)[0-1])(-)(((0)[0-9])|((1)[0-2]))(-)\d{4}$/;
     const regexPassword = /.{6,}$/;
     const regexEmail =
       /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    const regexPhone = /^[0-9]{10,15}$/;
-    const regexNik = /^[0-9]{16,16}$/;
 
     let messages = {};
 

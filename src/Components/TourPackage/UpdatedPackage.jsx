@@ -31,48 +31,45 @@ function UpdatedPackage(props) {
 
     useEffect(() =>{
         fetch();
-    }, [form])
+    }, [id])
 
     console.log("form", form)
     const onSubmit = (e) => {
         e.preventDefault();
-        const destinasi = form.destinasi_wisata.split(',');
-        const gambar = form.photo_wisata.split(',');
-        
-        Axios
-            .put(`/paket/update/${id}`,{...form, destinasi_wisata: destinasi, photo_wisata:gambar})
-            .then((response) => {
-                console.log(response);
-                alert("Data berhasil di Update")
-                setForm({
-                    nama_paket: "",
-                    destinasi_wisata: "",
-                    deskripsi:"",
-                    photo_wisata: "",
-                    harga: 0,
+            const destinasi = form.destinasi_wisata.split(',');
+            const gambar = form.photo_wisata.split(',');
+            Axios
+                .put(`/paket/update/${id}`,{...form, destinasi_wisata: destinasi, photo_wisata:gambar})
+                .then((response) => {
+                    console.log(response);
+                    alert("Data berhasil di Update")
+                    setForm({
+                        nama_paket: "",
+                        destinasi_wisata: "",
+                        deskripsi:"",
+                        photo_wisata: "",
+                        harga: 0,
+                    })
                 })
-            })
-            .catch((error) => {
-                console.log(error)
-            })
-        console.log(destinasi);
-        console.log(gambar);
+                .catch((error) => {
+                    console.log(error)
+                })
+        
     }
 
     console.log(id)
     return (
         <div>
-            {/* <h1 className="text-3xl sm:text-4xl font-bold text-black">Update Package</h1> */}
             <form method='PUT' action='#'>
                 <h3 className="text-xl sm:text-lg font-medium text-black">Nama paket</h3>
                 <input type="text" name="nama_paket" value={form.nama_paket} onChange={onChange} className='border border-gray-light mb-3 p-1 w-full rounded-md'/><br/>
 
                 <h3 className="text-xl sm:text-lg font-medium text-black">Destinasi Wisata</h3>
                 <input type="text" name="destinasi_wisata" value={form.destinasi_wisata} onChange={onChange} className='border border-gray-light mb-3 p-1 w-full rounded-md'/><br/>
-
+                
                 <h3 className="text-xl sm:text-lg font-medium text-black">Deskripsi</h3>
                 <input type="text" name="deskripsi" value={form.deskripsi} onChange={onChange} className='border border-gray-light mb-3 p-1 w-full rounded-md'/><br/>
-
+                
                 <h3 className="text-xl sm:text-lg font-medium text-black">Foto Wisata</h3>
                 <input type="text" name="photo_wisata" value={form.photo_wisata} onChange={onChange} className='border border-gray-light mb-3 p-1 w-full rounded-md'/><br/>
 
