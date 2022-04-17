@@ -14,7 +14,10 @@ function Login() {
         password: "",
     })
 
-    const [error, setError] = useState("");
+    const [errorMsg, setErrorMsg] = useState({
+        emailError: "",
+        passError: "",
+    });
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -26,8 +29,37 @@ function Login() {
         setForm({ ...form, [name]: value });
     };
 
+    const validate = () => {
+        let emailError = "";
+        let passError = "";
+        const regexEmail =
+      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        const regexPassword = /.{6,}$/;
+
+        if(!form.email){
+            emailError = "Email cannot be blank"
+        } else if(!regexEmail.test(form.email)){
+            emailError = "Invalid email format"
+        }
+
+        if(!form.password){
+            passError = "password cannot be blank"
+        } else if (!regexPassword.test(form.password)){
+             passError = "Min. 6 character"
+        }
+
+        if(emailError || passError){
+            setErrorMsg({emailError, passError});
+            return false;
+        }
+
+        return true
+    }
+
     const onSubmit = (e) =>{
-        axios
+        const isValid = validate();
+        if(isValid){
+            axios
             .post('https://hoqobajoe.herokuapp.com/api/login',{...form})
             .then((resp) =>{
                 console.log("ini respon: ", resp)
@@ -51,16 +83,16 @@ function Login() {
                     navigate("/dashboard")
                 } else {
                     e.preventDefault();
-                    setError("Anda Belum terdaftar");
+                    // setError("Anda Belum terdaftar");
                 }
                 alert("Berhasil Login")
                 
             })
-            .catch(err => setError("Anda Belum terdaftar"));
-        // console.log("masuk")
+            .catch(err => console.log(err));
+        }
+        
     }
     
-  
     return (
         <div className='static'>
             <div className="bg-home h-screen bg-cover bg-no-repeat flex">
@@ -70,11 +102,18 @@ function Login() {
                         <form method='POST' action='#'>
                             <div className="mb-2 mt-10 lg:mx-10 sm:mx-5 md:mx-5">
                                 <h3 className="text-lg sm:text-xl font-medium text-black">Email</h3>
-                                <input type="email" name="email" value={form.email} onChange={onChange} className='w-full rounded-lg p-4 h-10 shadow-md leading-tight hover:shadow-lg transition'/>
+                                <div className='mb-3'>
+                                    <input type="email" name="email" value={form.email} onChange={onChange} className='w-full rounded-lg p-4 h-10 shadow-md leading-tight hover:shadow-lg transition'/>
+                                    <p className='text-red'>{errorMsg.emailError}</p>
+                                </div>
                             </div>
                             <div className="mb-4 mt-5 lg:mx-10 sm:mx-5 md:mx-5">
                                 <h3 className="text-xl sm:text-xl font-medium text-black">Password</h3>
-                                <input type="password" name="password" value={form.password} onChange={onChange} className='w-full rounded-lg p-4 h-10 shadow-md leading-tight hover:shadow-lg transition'/>
+                                <div className='mb-3'>
+                                    <input type="password" name="password" value={form.password} onChange={onChange} className='w-full rounded-lg p-4 h-10 shadow-md leading-tight hover:shadow-lg transition'/>
+                                    <p className='text-red'>{errorMsg.passError}</p>
+
+                                </div>
                             </div>
                         </form>
 

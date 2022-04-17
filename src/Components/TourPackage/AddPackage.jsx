@@ -10,14 +10,59 @@ function AddPackage(props) {
         harga: 0,
     })
 
+    const [errorMsg, setErrorMsg] = useState({
+        nameError: "",
+        destinasiError: "",
+        deskripsiError: "",
+        fotoError: "",
+        hargaError: "",
+    });
+
     const onChange = (e) => {
         const name = e.target.name;
         const value = e.target.value;
         setForm({ ...form, [name]: value });
     };
 
+    const validate = () => {
+        let nameError = "";
+        let destinasiError = "";
+        let deskripsiError = "";
+        let fotoError = "";
+        let hargaError = "";
+        const regexNumber = /^[0-9]*$/;
+
+
+        if(!form.nama_paket){
+            nameError = "Name package cannot be blank"
+        }
+
+        if(!form.destinasi_wisata){
+            destinasiError = "Tourist destination cannot be blank"
+        }
+        if(!form.deskripsi){
+            deskripsiError = "Description cannot be blank"
+        }
+        if(!form.photo_wisata){
+            fotoError = "Picture cannot be blank"
+        }
+
+        if(!form.harga){
+            hargaError = "Price cannot be blank"
+        }
+        
+        if(destinasiError || nameError || hargaError || fotoError || deskripsiError){
+            setErrorMsg({nameError, destinasiError, deskripsiError, fotoError, hargaError});
+            return false;
+        }
+
+        return true
+    }
+
     const onSubmit = (e) => {
         e.preventDefault();
+        const isValid = validate();
+        if(isValid){
         const destinasi = form.destinasi_wisata.split(',');
         const gambar = form.photo_wisata.split(',');
         Axios
@@ -37,8 +82,7 @@ function AddPackage(props) {
             .catch((error) => {
                 console.log(error)
             })
-        console.log(destinasi);
-        console.log(gambar);
+        }
     }
 
   return (
@@ -48,29 +92,44 @@ function AddPackage(props) {
             <h1 className="text-3xl sm:text-4xl font-bold text-center border-b p-1 mb-10 border-gray-light">Add Package</h1>
 
             <form method='POST' action='#' className='text-[#495057]'>
-                <div className='flex justify-between'>
-                    <p className='text-xl sm:text-xl font-medium '>Nama paket</p>
-                    <input type="text" name="nama_paket" value={form.nama_paket} onChange={onChange} className='border border-gray-light mb-3 p-1 w-9/12 rounded'/>
+                <div className='flex gap-7'>
+                    <p className='text-xl sm:text-xl font-medium w-56'>Nama paket</p>
+                    <div className='mb-3 w-full'>
+                        <input type="text" name="nama_paket" value={form.nama_paket} onChange={onChange} className='border border-gray-light p-1 w-full rounded'/>
+                        <p className='text-red'>{errorMsg.nameError}</p>
+                    </div>
                 </div>
 
-                <div className='flex justify-between'>
-                    <h3 className="text-xl sm:text-xl font-medium">Destinasi Wisata</h3>
-                    <input type="text" name="destinasi_wisata" value={form.destinasi_wisata} onChange={onChange} className='border border-gray-light mb-3 p-1 w-9/12 rounded'/>
+                <div className='flex gap-7'>
+                    <h3 className="text-xl sm:text-xl font-medium w-56">Destinasi Wisata</h3>
+                    <div className='mb-3 w-full'>
+                        <input type="text" name="destinasi_wisata" value={form.destinasi_wisata} onChange={onChange} className='border border-gray-light p-1 w-full rounded'/>
+                        <p className='text-red'>{errorMsg.destinasiError}</p>
+                    </div>
                 </div>
 
-                <div className='flex justify-between'>
-                    <h3 className="text-xl sm:text-xl font-medium">Deskripsi</h3>
-                    <input type="text" name="deskripsi" value={form.deskripsi} onChange={onChange} className='border border-gray-light mb-3 p-1 w-9/12 rounded'/>
+                <div className='flex gap-7'>
+                    <h3 className="text-xl sm:text-xl font-medium w-56">Deskripsi</h3>
+                    <div className='mb-3 w-full'>
+                        <input type="text" name="deskripsi" value={form.deskripsi} onChange={onChange} className='border border-gray-light p-1 w-full rounded'/>
+                        <p className='text-red'>{errorMsg.deskripsiError}</p>
+                    </div>
                 </div>
 
-                <div className='flex justify-between'>
-                    <h3 className="text-xl sm:text-xl font-medium">Foto Wisata</h3>
-                    <input type="text" name="photo_wisata" value={form.photo_wisata} onChange={onChange} className='border border-gray-light mb-3 p-1 w-9/12 rounded'/>
+                <div className='flex gap-7'>
+                    <h3 className="text-xl sm:text-xl font-medium w-56">Foto Wisata</h3>
+                    <div className='mb-3 w-full'>
+                        <input type="text" name="photo_wisata" value={form.photo_wisata} onChange={onChange} className='border border-gray-light p-1 w-full rounded'/>
+                        <p className='text-red'>{errorMsg.fotoError}</p>
+                    </div>
                 </div>
 
-                <div className='flex justify-between'>
-                    <h3 className="text-xl sm:text-xl font-medium">harga</h3>
-                    <input type="number" name="harga" value={form.harga} onChange={onChange} className='border border-gray-light mb-3 p-1 w-9/12 rounded'/>
+                <div className='flex gap-7'>
+                    <h3 className="text-xl sm:text-xl font-medium w-56">harga</h3>
+                    <div className='mb-3 w-full'>
+                        <input type="number" name="harga" value={form.harga} onChange={onChange} className='border border-gray-light p-1 w-full rounded'/>
+                        <p className='text-red'>{errorMsg.hargaError}</p>
+                    </div>
                 </div>
 
                 <div className='flex justify-center'>

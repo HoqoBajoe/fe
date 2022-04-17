@@ -9,15 +9,59 @@ function RegisUser() {
         password: "",
     })
 
+    const [errorMsg, setErrorMsg] = useState({
+        nameError: "",
+        emailError: "",
+        passError: "",
+    });
+
     const onChange = (e) => {
         const name = e.target.name;
         const value = e.target.value;
         setForm({ ...form, [name]: value });
     };
 
+    const validate = () => {
+        let nameError = "";
+        let emailError = "";
+        let passError = "";
+        const regexName = /^[a-zA-Z ]{3,}$/;
+        const regexEmail =
+      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        const regexPassword = /.{6,}$/;
+
+
+        if(!form.nama){
+            nameError = "Name cannot be blank"
+        } else if (!regexName.test(form.nama)){
+            nameError = "Min. 3 character and String Only"
+        }
+
+        if(!form.email){
+            emailError = "Email cannot be blank"
+        } else if(!regexEmail.test(form.email)){
+            emailError = "Invalid email format"
+        }
+
+        if(!form.password){
+            passError = "password cannot be blank"
+        } else if (!regexPassword.test(form.password)){
+             passError = "Min. 6 character"
+        }
+
+        if(emailError || nameError || passError){
+            setErrorMsg({nameError, emailError, passError});
+            return false;
+        }
+
+        return true
+    }
+
     const onSubmit = (e) => {
         e.preventDefault();
-        Axios
+        const isValid = validate();
+        if(isValid){
+            Axios
             .post(`/register`,{...form})
             .then((response) => {
                 console.log(response);
@@ -27,10 +71,16 @@ function RegisUser() {
                     email: "",
                     password: "", 
                 })
+                setErrorMsg({
+                    nameError: "",
+                    emailError: "",
+                    passError: "",
+                })
             })
             .catch((error) => {
                 console.log(error)
             })
+        }
     }
     return (
         <div>
@@ -42,15 +92,40 @@ function RegisUser() {
                         <form method='POST' action='#'>
                             <div className="mb-2 mt-10 lg:mx-10 sm:mx-5 md:mx-5">
                                 <h3 className="text-lg sm:text-xl font-medium text-black mb-1">Nama</h3>
-                                <input type="text" name="nama" value={form.nama} onChange={onChange} className='w-full rounded-lg p-4 h-10 shadow-md leading-tight hover:shadow-lg transition'/>
+                                <div>
+                                    <input 
+                                    type="text" 
+                                    name="nama" 
+                                    value={form.nama} 
+                                    onChange={onChange} 
+                                    className='w-full rounded-lg p-4 h-10 shadow-md leading-tight hover:shadow-lg transition'/>
+                                    <p className='text-red'>{errorMsg.nameError}</p>
+                                </div>  
                             </div>
+
                             <div className="mb-2 mt-5 lg:mx-10 sm:mx-5 md:mx-5">
                                 <h3 className="text-lg sm:text-xl font-medium text-black mb-1">Email</h3>
-                                <input type="email" name="email" value={form.email} onChange={onChange} className='w-full rounded-lg p-4 h-10 shadow-md leading-tight hover:shadow-lg transition'/>
+                                <div>
+                                    <input 
+                                        type="email" 
+                                        name="email" 
+                                        value={form.email} 
+                                        onChange={onChange} 
+                                        className='w-full rounded-lg p-4 h-10 shadow-md leading-tight hover:shadow-lg transition'/>
+                                    <p className='text-red'>{errorMsg.emailError}</p>
+                                </div>
                             </div>
                             <div className="mb-4 mt-5 lg:mx-10 sm:mx-5 md:mx-5">
                                 <h3 className="text-xl sm:text-xl font-medium text-black mb-1">Password</h3>
-                                <input type="password" name="password" value={form.password} onChange={onChange} className='w-full rounded-lg p-4 h-10 shadow-md leading-tight hover:shadow-lg transition'/>
+                                <div>
+                                    <input 
+                                        type="password" 
+                                        name="password" 
+                                        value={form.password} 
+                                        onChange={onChange} 
+                                        className='w-full rounded-lg p-4 h-10 shadow-md leading-tight hover:shadow-lg transition'/>
+                                    <p className='text-red'>{errorMsg.passError}</p>
+                                </div>
                             </div>
                             <div className='flex justify-center mt-10'>
                             <button type='submit' onClick={onSubmit} className='text-white bg-gray p-2 rounded-lg w-72 mt-5 uppercase font-semibold shadow-md  hover:bg-gray-white'>Sign In</button>
