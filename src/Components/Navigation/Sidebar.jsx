@@ -13,34 +13,6 @@ function Sidebar() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-<<<<<<< HEAD:src/Components/Navigation/SideBarSuperAdmin.jsx
-  const initialValue = {
-    nama: user.nama,
-    role: user.role,
-  }
-
-  const [form, setForm] = useState(initialValue)
-  const roleCheck = "admin"
-
-  //  const fetch = async () => {
-  //       await Axios.get(`/logout`)
-  //         .then((resp) =>{
-  //           dispatch(logout());
-  //           cookies.remove("token", { path: "/", domain: window.location.hostname });
-  //           if (window.location.pathname) {
-  //             navigate("/");
-  //           } else {
-  //             window.location.reload();
-  //           }
-  //       })
-  //   }
-
-  const onClick = () => {
-    sessionStorage.removeItem('token');
-    dispatch(logout());
-    cookies.remove("token", { path: "/dashboard", domain: window.location.hostname });
-    
-=======
   const onClick = () => {
     dispatch(logout());
     cookies.remove("token", { path: "/dashboard", domain: window.location.hostname });
@@ -50,7 +22,6 @@ function Sidebar() {
       "Redirecting to Homepage..",
       'success'
     )
->>>>>>> e91b020478caf80c1fcb25be76ccbceab43999af:src/Components/Navigation/Sidebar.jsx
     if (window.location.pathname) {
       navigate("/");
     } else {
@@ -100,12 +71,8 @@ function Sidebar() {
               </ul>  
             }
         </div>
-<<<<<<< HEAD:src/Components/Navigation/SideBarSuperAdmin.jsx
-        <button className='text-white flex bg-gray-dark w-72 p-3 gap-3 justify-center' onClick={onClick}><FiLogOut className='stroke-white w-6 h-6'/>Logout</button>
-=======
         <button className='text-white flex bg-gray-dark w-72 p-3 gap-3 justify-center' onClick={onClick}> <FiLogOut className='stroke-white w-6 h-6'/>Logout</button>
      </div>
->>>>>>> e91b020478caf80c1fcb25be76ccbceab43999af:src/Components/Navigation/Sidebar.jsx
     </div>
     )
   }
