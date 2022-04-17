@@ -2,9 +2,8 @@ import React, { useState } from 'react'
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import Cookies from 'universal-cookie';
-import { Axios } from '../../Helper/axios';
 import { login } from '../../Redux/AdminSlice';
-import { Base64 } from "js-base64";
+import { Base64 } from 'js-base64';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 
@@ -37,7 +36,7 @@ function Login() {
                 domain: window.location.hostname,
                 });
 
-                if (resp.data.data.role == 'super-admin' || resp.data.data.role == 'admin'){
+                if (resp.data.data.role === 'super-admin' || resp.data.data.role === 'admin'){
                     dispatch(
                         login({
                             id: resp.data.data.id,
@@ -57,7 +56,6 @@ function Login() {
                 
             })
             .catch(err => setError("Anda Belum terdaftar"));
-        // console.log("masuk")
     }
     
   
@@ -83,13 +81,13 @@ function Login() {
                         </div>
                         <div className="flex justify-center mt-5 mb-5">
                             <Link to={'/register'}>
-                                <a className="font-bold shadow-sm hover:shadow-lg hover:border-b-2 transition">Create Account</a>
+                                <a href="!#" className="font-bold shadow-sm hover:shadow-lg hover:border-b-2 transition">Create Account</a>
                             </Link>
                         </div>
                     </div>
                 </div>
             </div>
-        
+            
         </div>
     )
 }

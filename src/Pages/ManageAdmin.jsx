@@ -1,12 +1,12 @@
 import React from 'react'
 import ListAdmin from '../Components/ManageAdmin/ListAdmin'
 import RegisAdmin from '../Components/ManageAdmin/RegisAdmin'
-import SideBarSuperAdmin from '../Components/Navigation/SideBarSuperAdmin'
+import Sidebar from '../Components/Navigation/Sidebar'
 
-function MangeAdmin() {
+function ManageAdmin() {
   return (
     <div className='flex'>
-        <SideBarSuperAdmin/>
+        <Sidebar/>
         <div className='w-4/6 mx-auto'>
             <ListAdmin/>
             <RegisAdmin/>
@@ -15,4 +15,4 @@ function MangeAdmin() {
   )
 }
 
-export default MangeAdmin
+export default ManageAdmin

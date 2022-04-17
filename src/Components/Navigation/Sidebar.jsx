@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import UserProfile from '../../Images/man.png'
 import { FiLogOut } from "react-icons/fi";
@@ -7,19 +7,11 @@ import Cookies from 'universal-cookie';
 import { Link, useNavigate } from 'react-router-dom';
 import { Axios } from '../../Helper/axios';
 
-function SideBarSuperAdmin() {
+function Sidebar() {
   const user = useSelector((state) => state.admin)
   const cookies = new Cookies();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
-  const initialValue = {
-    nama: user.nama,
-    role: user.role,
-  }
-
-  const [form, setForm] = useState(initialValue)
-  const roleCheck = "admin"
 
    const fetch = async () => {
         await Axios.get(`/logout`)
@@ -34,30 +26,23 @@ function SideBarSuperAdmin() {
         })
     }
 
-  const onClick = () => {
-    
-    dispatch(logout());
-    cookies.remove("token", { path: "/dashboard", domain: window.location.hostname });
-    if (window.location.pathname) {
-      navigate("/");
-    } else {
-      window.location.reload();
-    }
-  };
-
   return (
     <div className='sticky top-0 h-screen'>
     <div className='w-72 h-screen bg-gray flex flex-col justify-between'>
         <div className='pt-4 p-2 text-[#f8f9fa]'>
-            <img src={UserProfile} className='w-14 h-14 mx-auto mb-4'/>
+            <img src={UserProfile} alt="" className='w-14 h-14 mx-auto mb-4'/>
             <div className='w-max mx-auto mb-2'>
-                <p className="text-3xl sm:text-lg font-semibold">{form.nama}</p>
-                <p className='sm:text-sm font-medium text-black italic w-max mx-auto'>{form.role}</p>
+                <p className="text-3xl sm:text-lg font-semibold">{user.nama}</p>
+                { user.role === 'super-admin' ? 
+                  <p className='sm:text-sm font-medium text-black italic w-max mx-auto'>Super Admin</p>
+                 :
+                  <p className='sm:text-sm font-medium text-black italic w-max mx-auto'>Admin</p>
+                } 
             </div>
             
             <div className='border border-gray-dark mb-4'></div>
             {
-              roleCheck === form.role ? 
+              user.role === 'admin' ? 
               <ul className='text-[#f8f9fa] ml-5 list-none'>
                 <Link to="/dashboard">
                   <li className='hover:font-semibold hover:cursor-pointer'>Home</li>
@@ -89,4 +74,4 @@ function SideBarSuperAdmin() {
   )
 }
 
-export default SideBarSuperAdmin
+export default Sidebar
