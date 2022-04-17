@@ -28,7 +28,7 @@ function Login() {
 
     const onSubmit = (e) =>{
         axios
-            .post('http://hoqobajoe.herokuapp.com/api/login',{...form})
+            .post('https://hoqobajoe.herokuapp.com/api/login',{...form})
             .then((resp) =>{
                 console.log("ini respon: ", resp)
                 const hash = Base64.encode(resp.data.data.token);

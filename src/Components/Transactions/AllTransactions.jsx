@@ -21,7 +21,7 @@ function AllTransactions() {
   const [transaction, setTransaction] = useState([]);
 
     const fetch = async () => {
-        await axios.get(`http://hoqobajoe.herokuapp.com/api/transaction`, GenerateAxiosConfig()).then((resp) =>{
+        await axios.get(`https://hoqobajoe.herokuapp.com/api/transaction`, GenerateAxiosConfig()).then((resp) =>{
             setTransaction(resp.data.data)
         })
     }
