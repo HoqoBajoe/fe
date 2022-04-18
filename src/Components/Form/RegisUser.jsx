@@ -111,7 +111,7 @@ function RegisUser() {
         <div>
             <div className='static'>
             <div className="bg-home h-screen bg-cover bg-no-repeat flex">
-                <div className='container'>
+                <div className='container mx-auto my-auto'>
                     <div className='w-1/3 m-auto mt-36 p-2 border-solid rounded-xl shadow-2xl mb-20 bg-ivory min-w-max sm:max-w-xl'>
                         <h1 className="text-3xl sm:text-4xl mt-6 font-bold text-black mb-8 text-center">Hoqo Bajoe</h1>
                         <form method='POST' action='#'>

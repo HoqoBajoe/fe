@@ -1,22 +1,7 @@
-import axios from 'axios';
-import { Base64 } from 'js-base64';
 import React, { useEffect, useState } from 'react'
-import Cookies from 'universal-cookie';
 import { Axios } from '../../Helper/axios';
 import Swal from 'sweetalert2';
 
-function GenerateAxiosConfig() {
-    const cookies = new Cookies();
-    const token = Base64.decode(cookies.get("token"));
-    const config = {
-      headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json;charset=UTF-8",
-          Authorization: "Bearer " + token,
-      },
-    };
-    return config;
-  }
 function AllTransactions() {
     const [transaction, setTransaction] = useState([]);
 
@@ -67,7 +52,7 @@ function AllTransactions() {
 
     useEffect(() =>{
         fetch();
-    }, [])
+    }, [transaction])
 
     return (
         <div className='w-full mx-auto mb-20 mt-10'>

@@ -16,7 +16,7 @@ function ListAdmin() {
 
     useEffect(() =>{
         fetch();
-    }, [])
+    }, [admin])
 
     return (
         <div className='w-full mx-auto mt-10'>

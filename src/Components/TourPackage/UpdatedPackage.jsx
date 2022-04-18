@@ -49,7 +49,6 @@ function UpdatedPackage(props) {
                     'Update Tour Package success..',
                     'success'
                 )
-                alert("Data berhasil di Update")
                 setForm({
                     nama_paket: "",
                     destinasi_wisata: "",

@@ -2,10 +2,10 @@ import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import UserProfile from '../../Images/man.png'
 import { FiLogOut } from "react-icons/fi";
-import { logout } from '../../Redux/AdminSlice';
 import Cookies from 'universal-cookie';
 import { Link, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import { logout } from '../../Redux/AdminSlice';
 
 function Sidebar() {
   const user = useSelector((state) => state.admin)
