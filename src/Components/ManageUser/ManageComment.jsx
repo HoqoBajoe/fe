@@ -1,30 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { Axios } from '../../Helper/axios';
-import { Base64 } from "js-base64"
-import Cookies from "universal-cookie";
 import { AiFillStar } from "react-icons/ai";
 import Swal from 'sweetalert2';
 
-function GenerateAxiosConfig() {
-
-  const cookies = new Cookies();
-  const token = Base64.decode(cookies.get("token"));
-  const config = {
-    headers: {
-      Authorization: "Bearer " + token,
-    },
-  };
-  return config;
-}
-
 function ManageComment(props) {
     const [review, setReview] = useState([]);
-
-    // const getReview = async () => {
-    //     await Axios.get(`/review/all`,GenerateAxiosConfig()).then((resp) =>{
-    //         setReview(resp.data.data)
-    //     })
-    // }
     
     const getReview = async () => {
         await Axios.get(`/review/all`).then((resp) =>{

@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { Axios } from '../../Helper/axios';
+import Swal from 'sweetalert2';
 
 function AddPackage(props) {
     const [form, setForm] = useState({
@@ -30,7 +31,6 @@ function AddPackage(props) {
         let deskripsiError = "";
         let fotoError = "";
         let hargaError = "";
-        const regexNumber = /^[0-9]*$/;
 
 
         if(!form.nama_paket){
@@ -69,13 +69,24 @@ function AddPackage(props) {
             .post(`/paket/create`,{...form, destinasi_wisata: destinasi, photo_wisata:gambar})
             .then((response) => {
                 console.log(response);
-                alert('Berhasil menambah paket wisata')
+                Swal.fire(
+                    'Success!',
+                    'Add Tour Package success..',
+                    'success'
+                )
                 setForm({
                     nama_paket: "",
                     destinasi_wisata: "",
                     deskripsi:"",
                     photo_wisata: "",
                     harga: 0,
+                })
+                setErrorMsg({
+                    nameError: "",
+                    destinasiError: "",
+                    deskripsiError: "",
+                    fotoError: "",
+                    hargaError: "",
                 })
                 
             })
@@ -84,7 +95,6 @@ function AddPackage(props) {
             })
         }
     }
-    console.log("ini form add => ",form);
 
   return (
     <div>

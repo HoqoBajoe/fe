@@ -1,11 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { FiSearch } from "react-icons/fi";
-import { FaTrashAlt } from "react-icons/fa";
-import UserProfile from '../../Images/man.png'
 import { Axios } from '../../Helper/axios';
-import moment from "moment";
 import UpdatedPackage from './UpdatedPackage';
-import AddPackage from './AddPackage';
 import Swal from 'sweetalert2';
 
 function Modal(props) {

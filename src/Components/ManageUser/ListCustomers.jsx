@@ -4,20 +4,8 @@ import { MdDateRange } from "react-icons/md";
 import UserProfile from '../../Images/man.png'
 import { Axios } from '../../Helper/axios';
 import moment from "moment";
-import { Base64 } from "js-base64";
-import Cookies from "universal-cookie";
 import Swal from 'sweetalert2'
 
-function GenerateAxiosConfig() {
-  const cookies = new Cookies();
-  const token = Base64.decode(cookies.get("token"));
-  const config = {
-    headers: {
-      Authorization: "Bearer " + token,
-    },
-  };
-  return config;
-}
 
 function ListCustomers() {
     const [customer, setCustomer] = useState([]);
