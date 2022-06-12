@@ -36,7 +36,8 @@ module.exports = {
     },
     extend: {
       backgroundImage: {
-        'home' : "url('/src/Images/bgimage.jpg')"
+        'home' : "url('/src/Images/bgimage.jpg')",
+        'tour' : "url('/src/Images/pinkBeach.jpg')"
       }
     },
   },

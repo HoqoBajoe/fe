@@ -65,7 +65,7 @@ function AllPackage(props) {
 
     useEffect(() =>{
         fetchTour('');
-    }, [tourPackage])
+    }, [])
 
     return (
         <div className='w-full mx-auto mt-10'>

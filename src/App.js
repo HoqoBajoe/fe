@@ -13,6 +13,9 @@ import RegisterPage from "./Pages/RegsiterPage";
 import ManageAdmin from "./Pages/ManageAdmin";
 import TourPackage from "./Pages/TourPackage";
 import Transactions from "./Pages/Transactions";
+import AllPackageUser from "./Components/TourPackage/AllPackageUser";
+import DetailPackage from "./Components/TourPackage/DetailPackage";
+import Profileuser from "./Components/User/Profileuser";
 
 function App() {
 
@@ -29,6 +32,9 @@ function App() {
               <Route path="/manage-admin" element={<ManageAdmin/>}/>
               <Route path="/tour-package" element={<TourPackage/>}/>
               <Route path="/transaction" element={<Transactions/>}/>
+              <Route path="/tour" element={<AllPackageUser/>}/>
+              <Route path="/detail-package/:id" element={<DetailPackage/>}/>
+              <Route path="/profile-user" element={<Profileuser/>}/>
             </Routes>   
           </BrowserRouter>
         </PersistGate>

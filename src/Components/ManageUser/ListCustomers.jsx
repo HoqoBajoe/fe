@@ -11,6 +11,7 @@ function ListCustomers() {
     const [customer, setCustomer] = useState([]);
     const fetch = async () => {
         await Axios.get(`/user`).then((resp) =>{
+            console.log(resp)
             setCustomer(resp.data.data)
         })
     }

@@ -6,10 +6,10 @@ function HomeUser() {
   return (
     <div>
       <h1 className="text-4xl font-bold text-black py-6 mb-9">Destinasi Favorit</h1>
-      <div className='max-w-fit mx-auto flex flex-col gap-10 sm:flex-row sm:gap-16'>
-        <div className="max-w-xs mx-auto bg-white rounded-xl drop-shadow-lg h-96 relative hover:drop-shadow-2xl">
+      <div className='max-w-fit mx-auto flex flex-col gap-10 sm:flex-row sm:gap-16 '>
+        <div className="max-w-xs mx-auto bg-white rounded-xl drop-shadow-lg h-96 relative hover:drop-shadow-2xl z-0">
           <img src={Gambar} className="rounded-t-lg h-2/4 w-full"/>
-          <div className='p-2 w-1/2 rounded-r-lg bg-gray text-white font-semibold flex justify-center absolute top-50 left-0 cardPrice'>
+          <div className='p-2 w-1/2 rounded-r-lg bg-gray text-white font-semibold flex justify-center absolute top-50 left-0 cardPrice -z-50'>
               Rp.1.400.000
           </div>
           <div className='p-2'>
