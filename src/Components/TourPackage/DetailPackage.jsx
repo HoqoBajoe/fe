@@ -80,37 +80,37 @@ function DetailPackage() {
         })
     }
 
-    // const onSubmit = (e) => {
-    //     e.preventDefault();
+    const onSubmit = (e, id) => {
+        e.preventDefault();
 
-    //     // const rating = parseInt(form.stars)
-    //     // console.log('type: ',typeof form.stars)
-    //     // console.log(typeof rating)
+        // const rating = parseInt(form.stars)
+        // console.log('type: ',typeof form.stars)
+        // console.log(typeof rating)
 
-    //     // masih bermasalah di post karena req data tidak sesuai yg seharusnya int tapi diterima string atau ada masalah lain
-    //     Axios.post(`/review/paket/${id}`, {...form})
-    //     .then((resp) => {
-    //         console.log(resp)
-    //         console.log("berhasil")
-    //         Swal.fire(
-    //             'Add review success!',
-    //             'Register new review successfully..',
-    //             'success'
-    //         )
-    //         setForm({
-    //             stars: 0,
-    //             feedback: ""
-    //         })
-    //     })
-    //     .catch((error) => {
-    //         console.log(error)
-    //         Swal.fire(
-    //             'Add review error!',
-    //             'Add new review error..',
-    //             'error'
-    //         )
-    //     })
-    // }
+        // masih bermasalah di post karena req data tidak sesuai yg seharusnya int tapi diterima string atau ada masalah lain
+        Axios.post(`/review/paket/${id}`, {...form})
+        .then((resp) => {
+            console.log(resp)
+            console.log("berhasil")
+            Swal.fire(
+                'Add review success!',
+                'Register new review successfully..',
+                'success'
+            )
+            setForm({
+                stars: 0,
+                feedback: ""
+            })
+        })
+        .catch((error) => {
+            console.log(error)
+            Swal.fire(
+                'Add review error!',
+                'Add new review error..',
+                'error'
+            )
+        })
+    }
 
     const onSubmitTransaction = (e) => {
         e.preventDefault();
@@ -209,7 +209,7 @@ function DetailPackage() {
                 </div>
             </div>
 
-            {/* <div className='bg-white rounded-md drop-shadow-lg  p-7 border border-gray-light w-3/5 mx-auto mb-16 mt-20'>                
+            <div className='bg-white rounded-md drop-shadow-lg  p-7 border border-gray-light w-3/5 mx-auto mb-16 mt-20'>                
                 <form method='POST' action='#'>
                     <div className='flex justify-between'>
                         <p className="text-xl font-medium">Stars</p>
@@ -239,7 +239,7 @@ function DetailPackage() {
                         <button type='submit' onClick={onSubmit} className='text-white bg-gray p-2 rounded-lg w-72 mt-5'>Add Review</button>
                     </div>
                 </form>
-            </div> */}
+            </div>
             <div className='relative'>
 
             
@@ -248,28 +248,13 @@ function DetailPackage() {
                 <h1 className="text-xl font-bold mb-3 border-b-2 border-gray-light pb-3">Transaction</h1>
                 <form method='POST' action='#'>
                     <div className='flex justify-between mb-4 border p-2 border-gray-light rounded-md'>
-                        {/* <p className="text-xl font-medium">Pax</p>
-                        <div className='mb-3'>
-                            <input  
-                            type="text" 
-                            name="pax" 
-                            value={transaction.pax}
-                            onChange={onChangeTrans}
-                            className='border border-gray-light p-1 w-96 rounded'/>
-                        </div> */}
-                        {amount.click <= 0 ? <FaMinus className="fill-gray-light"/> : <FaMinus onClick={decrement} className="fill-pink"/>}
+                        {amount.click <= 0 ? <FaMinus className="fill-gray-light"/> : <FaMinus onClick={decrement} className="fill-btn"/>}
                         <div className='text-[#495057]'>{amount.click}</div>
-                        <FaPlus onClick={increment} className="fill-pink"/>
+                        <FaPlus onClick={increment} className="fill-btn"/>
                     </div>
                     <div className=''>
                         <p className="text-lg font-medium mb-1 text-[#495057]">Payment Method</p>
                         <div className='mb-3'>
-                            {/* <input 
-                                type="text" 
-                                name="metode" 
-                                value={transaction.metode} 
-                                onChange={onChangeTrans}
-                                className='border border-gray-light p-1 w-96 rounded'/> */}
                             <select name="metode"  value={transaction.metode} onChange={onChangeTrans} className='border border-gray-light rounded-md w-full p-2 text-[#495057]'>
                                 <option></option>
                                 <option value='Virtual Account BNI'>BNI</option>
@@ -284,7 +269,7 @@ function DetailPackage() {
                     </div>
                     
                     <div className='flex justify-center'>
-                        <button type='submit' onClick={onSubmitTransaction} className='text-white bg-gray p-2 rounded-lg w-72 mt-3'>Buy</button>
+                        <button type='submit' onClick={onSubmitTransaction} className='text-white bg-btn p-2 rounded-lg w-72 mt-3'>Buy</button>
                     </div>
                 </form>
             </div>

@@ -2,6 +2,9 @@ import React from 'react'
 import { GiTakeMyMoney } from "react-icons/gi";
 import { FaGlobe } from "react-icons/fa";
 import { IoMdChatbubbles } from "react-icons/io";
+import Harga from "../../Images/pricing.svg"
+import Pelayanan from "../../Images/typing.svg"
+import Trip from "../../Images/trip.svg"
 
 function Info() {
   return (

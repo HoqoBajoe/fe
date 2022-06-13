@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import TouerElement from '../Information/TouerElement';
 import Gambar from "../../Images/pinkBeach.jpg"
 import Footer from '../Navigation/Footer';
+import Nav from '../Navigation/Nav';
 
 function AllPackageUser() {
     const [tourPackage, setTourPackage] = useState([]);
@@ -26,6 +27,7 @@ function AllPackageUser() {
     }, [])
   return (
     <div>
+        <Nav/>
             <div className='bg-tour h-96 w-full bg-cover bg-no-repeat bg-left bg-fixed'>
                 <div className='mx-auto w-fit h-fit my-auto'>
                     <h1 className="text-3xl sm:text-6xl font-bold text-black pt-20 text-gray drop-shadow-2xl">Tour Package</h1>
@@ -44,14 +46,14 @@ function AllPackageUser() {
                     {tourPackage?.map((item) => (
                         <div key={item.id} className="max-w-xs mx-auto bg-white rounded-xl drop-shadow-lg h-96 relative hover:drop-shadow-2xl">
                             <img src={item.photo_wisata[0]} className="rounded-t-lg h-2/4 w-full"/>
-                            <div className='p-2 w-1/2 rounded-r-lg bg-gray text-white font-semibold flex justify-center absolute top-50 left-0 cardPrice'>
+                            <div className='p-2 w-1/2 rounded-r-lg bg-blue-dark text-white font-semibold flex justify-center absolute top-50 left-0 cardPrice'>
                                 Rp. {item.harga}
                             </div>
                             <div className='p-2'>
-                                <h2 className="text-2xl font-bold text-black p-2 mt-3">{item.nama_paket}</h2>
+                                <h2 className="text-2xl font-bold text-black p-2 mt-5 mb-7">{item.nama_paket}</h2>
                                 <div className='flex justify-center'>
                                     
-                                <button className='p-3 w-3/4 rounded-full bg-gray text-white font-semibold hover:bg-gray-dark'>
+                                <button className='p-3 w-3/4 rounded-full bg-btn text-white font-semibold'>
                                     <Link to={`/detail-package/${item.id}`}>
                                     LIHAT DETAIL
                                     </Link>

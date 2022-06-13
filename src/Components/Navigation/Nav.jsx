@@ -7,7 +7,7 @@ const Nav = () => {
 
 
     return (
-        <div className='shadow-md w-full fixed top-0 left-0 md:bg-transparent nav'>
+        <div className='shadow-md w-full top-0 left-0 bg-blue nav'>
             <div className='md:flex items-center justify-between py-4 md:px-10 px-7 border-b border-white mx-7'>
                 <Link to={'/'}>
                     <a className='font-bold text-2xl cursor-pointer flex items-center 
@@ -40,7 +40,7 @@ const Nav = () => {
                         </li>
 
                         <li className='md:ml-8 text-xl md:my-0 my-7'>
-                            <a href="/profile-user" className='text-gray-800 hover:text-gray-400 duration-500'>Tour Package</a>
+                            <a href="/profile-user" className='text-gray-800 hover:text-gray-400 duration-500'>Profile</a>
                         </li>
                 </ul>
 

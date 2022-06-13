@@ -58,3 +58,14 @@ halaman user profile
 halaman landing page
 - tampilan masih kurang
 - navbar diperbaiki
+
+13 juni 2022
+
+profile page
+-blm bisa update
+-history seharusnya ditampilkan yg sudah acc
+
+landing page
+-ganti informasi
+-query paket
+-tambahkan mendapatkan informasi dengan email
