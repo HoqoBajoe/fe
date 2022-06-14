@@ -74,6 +74,7 @@ function DetailPackage() {
             setTourPackage(resp.data.data)
         })
     }
+    
     const fetchReview = () => {
         Axios.get(`/review/paket/${id}`).then((resp) =>{
             setReview(resp.data.data)
@@ -160,9 +161,9 @@ function DetailPackage() {
     
     return (
         <div>
-            <Nav className='bg-black'/>
-            <div className='my-20 text-[#495057]'>
-                <div className="slide-container w-1/2 h-1/6 mx-auto mb-10 mt-24 drop-shadow-2xl">
+            <Nav/>
+            <div className='mb-20 mt-10 text-blue-text'>
+                <div className="slide-container w-1/2 h-1/6 mx-auto mb-10 drop-shadow-2xl">
                     <Zoom scale={0.4}>
                     {
                         tourPackage?.photo_wisata.map((each, index) => <img key={index} src={each} className="h-full w-full rounded-lg z-[-1]" />)
@@ -209,7 +210,7 @@ function DetailPackage() {
                 </div>
             </div>
 
-            <div className='bg-white rounded-md drop-shadow-lg  p-7 border border-gray-light w-3/5 mx-auto mb-16 mt-20'>                
+            {/* <div className='bg-white rounded-md drop-shadow-lg  p-7 border border-gray-light w-3/5 mx-auto mb-16 mt-20'>                
                 <form method='POST' action='#'>
                     <div className='flex justify-between'>
                         <p className="text-xl font-medium">Stars</p>
@@ -239,40 +240,38 @@ function DetailPackage() {
                         <button type='submit' onClick={onSubmit} className='text-white bg-gray p-2 rounded-lg w-72 mt-5'>Add Review</button>
                     </div>
                 </form>
-            </div>
+            </div> */}
+
             <div className='relative'>
-
-            
-
-            <div className='bg-white rounded-md drop-shadow-md p-3 border border-gray-light w-1/5 right-5 top-24 fixed'>                
-                <h1 className="text-xl font-bold mb-3 border-b-2 border-gray-light pb-3">Transaction</h1>
-                <form method='POST' action='#'>
-                    <div className='flex justify-between mb-4 border p-2 border-gray-light rounded-md'>
-                        {amount.click <= 0 ? <FaMinus className="fill-gray-light"/> : <FaMinus onClick={decrement} className="fill-btn"/>}
-                        <div className='text-[#495057]'>{amount.click}</div>
-                        <FaPlus onClick={increment} className="fill-btn"/>
-                    </div>
-                    <div className=''>
-                        <p className="text-lg font-medium mb-1 text-[#495057]">Payment Method</p>
-                        <div className='mb-3'>
-                            <select name="metode"  value={transaction.metode} onChange={onChangeTrans} className='border border-gray-light rounded-md w-full p-2 text-[#495057]'>
-                                <option></option>
-                                <option value='Virtual Account BNI'>BNI</option>
-                                <option value='Virtual Account BRI'>BRI</option>
-                                <option value='Virtual Account BCA'>BCA</option>
-                            </select>
+                <div className='bg-white rounded-md drop-shadow-md p-3 border border-gray-light w-1/5 right-5 top-24 fixed'>                
+                    <h1 className="text-xl font-bold mb-3 border-b-2 border-gray-light pb-3">Transaction</h1>
+                    <form method='POST' action='#'>
+                        <div className='flex justify-between mb-4 border p-2 border-gray-light rounded-md'>
+                            {amount.click <= 0 ? <FaMinus className="fill-gray-light"/> : <FaMinus onClick={decrement} className="fill-btn"/>}
+                            <div className='text-[#495057]'>{amount.click}</div>
+                            <FaPlus onClick={increment} className="fill-btn"/>
                         </div>
-                    </div>
-                    <div className='flex justify-between mt-6'>
-                        <p className="text-lg font-medium text-[#adb5bd]">Subtotal</p>
-                        <p className="text-xl font-medium text-[#495057]">Rp. {tourPackage.harga * amount.click}</p>
-                    </div>
-                    
-                    <div className='flex justify-center'>
-                        <button type='submit' onClick={onSubmitTransaction} className='text-white bg-btn p-2 rounded-lg w-72 mt-3'>Buy</button>
-                    </div>
-                </form>
-            </div>
+                        <div className=''>
+                            <p className="text-lg font-medium mb-1 text-[#495057]">Payment Method</p>
+                            <div className='mb-3'>
+                                <select name="metode"  value={transaction.metode} onChange={onChangeTrans} className='border border-gray-light rounded-md w-full p-2 text-[#495057]'>
+                                    <option></option>
+                                    <option value='Virtual Account BNI'>BNI</option>
+                                    <option value='Virtual Account BRI'>BRI</option>
+                                    <option value='Virtual Account BCA'>BCA</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div className='flex justify-between mt-6'>
+                            <p className="text-lg font-medium text-[#adb5bd]">Subtotal</p>
+                            <p className="text-xl font-medium text-[#495057]">Rp. {tourPackage.harga * amount.click}</p>
+                        </div>
+                        
+                        <div className='flex justify-center'>
+                            <button type='submit' onClick={onSubmitTransaction} className='text-white bg-blue hover:bg-blue-dark p-2 rounded-lg w-72 mt-3'>Buy</button>
+                        </div>
+                    </form>
+                </div>
             </div>
 
             <Footer/>

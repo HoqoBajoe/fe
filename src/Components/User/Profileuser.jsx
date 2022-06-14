@@ -1,12 +1,19 @@
 import React, { useEffect, useState } from 'react'
+import { useDispatch } from 'react-redux'
 import { Axios } from '../../Helper/axios'
 import Swal from 'sweetalert2';
 import moment from "moment";
 import Gambar from "../../Images/profile.svg"
 import Nav from '../Navigation/Nav';
 import Footer from '../Navigation/Footer';
+import { useNavigate } from 'react-router-dom';
+import { FiLogOut } from "react-icons/fi";
+import { logout } from '../../Redux/AdminSlice';
 
 function Profileuser() {
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+
     const [userProfile, setUserProfile] = useState({
         id: "",
         nama: "",
@@ -93,6 +100,21 @@ function Profileuser() {
             })
     }
 
+    const onClick = () => {
+        dispatch(logout());
+        sessionStorage.removeItem('token');
+        Swal.fire(
+        "Logout success!",
+        "Redirecting to Homepage..",
+        'success'
+        )
+        if (window.location.pathname) {
+        navigate("/");
+        } else {
+        window.location.reload();
+        }
+    };
+
     useEffect(() => {
         fetchData();
         fetchHistoryTrans();
@@ -102,12 +124,12 @@ function Profileuser() {
     return (
         <div>
             <Nav/>
-            <div className='w-1/2 mx-auto my-20'>
+            <div className='w-1/2 mx-auto my-20 text-blue-text'>
                 <img src={Gambar} className='w-2/5 mx-auto mb-10'/>
                 <div className='border border-gray-light rounded-lg p-3'>
                     <h1 className='text-xl font-bold mb-2 mt-3 text-blue-text'>My Profile</h1>
                     <div className='flex justify-end'>
-                        <button onClick={onClickEdit} className='text-white bg-btn p-2 rounded-lg w-32 mb-5'>Edit Profile</button>
+                        <button onClick={onClickEdit} className='text-white bg-blue hover:bg-blue-dark p-2 rounded-lg w-32 mb-5'>Edit Profile</button>
                     </div>
                     {edit === false ? 
                         <form method='PUT' action='#'>
@@ -121,7 +143,7 @@ function Profileuser() {
                             </div>
 
                             <div className='flex justify-center'>
-                                <button type='submit' onClick={onSubmit} disabled className='text-white bg-[#ff6b6b] p-2 rounded-md w-32 mt-5'>Save</button>
+                                <button type='submit' onClick={onSubmit} disabled className='text-white bg-blue-light p-2 rounded-md w-32 mt-5'>Save</button>
                             </div>
                         </form>
                         :
@@ -137,7 +159,7 @@ function Profileuser() {
                             </div>
 
                             <div className='flex justify-center'>
-                                <button type='submit' onClick={onSubmit} className='text-white bg-btn p-2 rounded-md w-32 mt-5'>Save</button>
+                                <button type='submit' onClick={onSubmit} className='text-white bg-blue hover:bg-blue-dark p-2 rounded-md w-32 mt-5'>Save</button>
                             </div>
                         </form>
                     }
@@ -175,6 +197,12 @@ function Profileuser() {
                     ))}
                     </div>
                 </div>
+                <div className='flex justify-end'>
+                    <button className='text-white flex bg-blue hover:bg-blue-dark w-48 p-3 gap-3 justify-center rounded-md mt-10' onClick={onClick}> 
+                        <FiLogOut className='stroke-white w-6 h-6'/>Logout
+                    </button>
+                </div>
+                
             </div>
             <Footer/>
         </div>

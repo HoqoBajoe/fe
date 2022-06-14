@@ -2,8 +2,6 @@ import React, { useEffect, useState }  from 'react'
 import { FiSearch } from "react-icons/fi";
 import { Axios } from '../../Helper/axios';
 import { Link } from "react-router-dom";
-import TouerElement from '../Information/TouerElement';
-import Gambar from "../../Images/pinkBeach.jpg"
 import Footer from '../Navigation/Footer';
 import Nav from '../Navigation/Nav';
 
@@ -30,7 +28,7 @@ function AllPackageUser() {
         <Nav/>
             <div className='bg-tour h-96 w-full bg-cover bg-no-repeat bg-left bg-fixed'>
                 <div className='mx-auto w-fit h-fit my-auto'>
-                    <h1 className="text-3xl sm:text-6xl font-bold text-black pt-20 text-gray drop-shadow-2xl">Tour Package</h1>
+                    <h1 className="text-3xl sm:text-6xl font-bold text-black pt-20 text-blue-text drop-shadow-2xl">Tour Package</h1>
                 </div>
 
                 <div className='flex mx-auto w-2/5 pt-10 drop-shadow-2xl'>
@@ -41,7 +39,7 @@ function AllPackageUser() {
                 </div>
             </div>
             
-            <div className='w-9/12 mx-auto my-20'>
+            <div className='w-9/12 mx-auto my-20 text-blue-text'>
                 <div className='grid grid-cols-3 gap-4'>
                     {tourPackage?.map((item) => (
                         <div key={item.id} className="max-w-xs mx-auto bg-white rounded-xl drop-shadow-lg h-96 relative hover:drop-shadow-2xl">
@@ -53,7 +51,7 @@ function AllPackageUser() {
                                 <h2 className="text-2xl font-bold text-black p-2 mt-5 mb-7">{item.nama_paket}</h2>
                                 <div className='flex justify-center'>
                                     
-                                <button className='p-3 w-3/4 rounded-full bg-btn text-white font-semibold'>
+                                <button className='p-3 w-3/4 rounded-full bg-blue hover:bg-blue-dark text-white font-semibold'>
                                     <Link to={`/detail-package/${item.id}`}>
                                     LIHAT DETAIL
                                     </Link>
