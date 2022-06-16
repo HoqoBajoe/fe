@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { Axios } from '../../Helper/axios';
 import { Zoom } from 'react-slideshow-image';
 import 'react-slideshow-image/dist/styles.css';
@@ -10,10 +10,12 @@ import moment from "moment";
 import Nav from '../Navigation/Nav';
 import Footer from '../Navigation/Footer';
 import Swal from 'sweetalert2';
+import Rating from 'react-rating';
 
 
 function DetailPackage() {
     const { id } = useParams()
+    const navigate = useNavigate();
 
     const initialValue = {
         nama_paket: "",
@@ -24,7 +26,7 @@ function DetailPackage() {
     }
 
     const [form, setForm] = useState({
-        stars: 0,
+        rating: 0,
         feedback: "",
     })
 
@@ -84,11 +86,18 @@ function DetailPackage() {
     const onSubmit = (e, id) => {
         e.preventDefault();
 
-        // const rating = parseInt(form.stars)
-        // console.log('type: ',typeof form.stars)
-        // console.log(typeof rating)
-
+        console.log('form: ',form)
         // masih bermasalah di post karena req data tidak sesuai yg seharusnya int tapi diterima string atau ada masalah lain
+        // if (condition) {
+            
+        // } else {
+        //     Swal.fire(
+        //         'Anda belum melakukan login!',
+        //         'Silahkan masuk terlebih dahulu.',
+        //         'error'
+        //     )
+        //     navigate("/login")
+        // }
         Axios.post(`/review/paket/${id}`, {...form})
         .then((resp) => {
             console.log(resp)
@@ -105,6 +114,7 @@ function DetailPackage() {
         })
         .catch((error) => {
             console.log(error)
+            console.log('ISI: ',form)
             Swal.fire(
                 'Add review error!',
                 'Add new review error..',
@@ -116,9 +126,6 @@ function DetailPackage() {
     const onSubmitTransaction = (e) => {
         e.preventDefault();
 
-        // const rating = parseInt(form.stars)
-        // console.log('type: ',typeof form.stars)
-        // console.log(typeof rating)
         const jumlah = amount.click.toString();
 
         Axios.post(`/transaction/paket/${id}`, {...transaction, pax: jumlah})
@@ -148,17 +155,24 @@ function DetailPackage() {
         })
     }
 
+    const initStars = (star) =>{
+        console.log('star: ',star)
+        form.rating = star
+        
+    }
+
 
 
     useEffect(() => {
         fetchData(id);
         fetchReview();
-    }, [setTourPackage,setReview])
+        initStars();
+    }, [setTourPackage,setReview, setForm])
 
     // console.log('tour: ',tourPackage)
     // console.log('review: ',review)
-    console.log('transaksi: ',transaction)
-    
+    // console.log('transaksi: ',transaction)
+    // console.log('bintang: ',form)
     return (
         <div>
             <Nav/>
@@ -207,8 +221,44 @@ function DetailPackage() {
                             </div>
                         ))}
                     </div>
+
+                     {/* <Rating
+                        emptySymbol={<AiFillStar className='fill-gray-light'/>}
+                        fullSymbol={<AiFillStar className='fill-[#ffd43b]'/>}
+                        onChange={(star) => initStars(star)}
+                        initialRating={form.rating}
+                    /> */}
+
+                    <div className='bg-white rounded-md drop-shadow p-3 w-full mx-auto mb-8'>
+                        
+                        <div className='flex items-center gap-16 mb-5'>
+                            <p className="text-lg font-medium">Rating</p>
+                            <Rating
+                                emptySymbol={<AiFillStar className='fill-gray-light'/>}
+                                fullSymbol={<AiFillStar className='fill-[#ffd43b]'/>}
+                                onChange={(star) => initStars(star)}
+                                initialRating={form.rating}
+                            />
+                        </div>
+                        
+                        <form method='POST' action='#'>
+                            <p className="text-lg font-medium mb-1">Comment</p>
+                            <textarea 
+                                rows={6} 
+                                className='border w-full rounded-md border-gray-light'
+                                name="feedback" 
+                                value={form.feedback}
+                                onChange={onChange}>
+                            </textarea>
+                            <div className='flex justify-end'>
+                                <button type='submit' onClick={onSubmit} className='text-white bg-blue p-2 rounded-lg w-40 mt-5'>Add Review</button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
+
+           
 
             {/* <div className='bg-white rounded-md drop-shadow-lg  p-7 border border-gray-light w-3/5 mx-auto mb-16 mt-20'>                
                 <form method='POST' action='#'>
@@ -232,7 +282,7 @@ function DetailPackage() {
                             name="feedback" 
                             value={form.feedback}
                             onChange={onChange}
-                            className='border border-gray-light p-1 w-96 rounded'/>
+                            className='border border-gray-light p-2 w-full rounded'/>
                         </div>
                         
                     </div>

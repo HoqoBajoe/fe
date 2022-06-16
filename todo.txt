@@ -69,3 +69,10 @@ landing page
 -ganti informasi
 -query paket
 -tambahkan mendapatkan informasi dengan email
+
+
+14 juni 2022 
+
+-handle kalo blm login user: review, transaksi, profile page
+-request add review dan update profile masih blm bisa
+-di add review pake react rating

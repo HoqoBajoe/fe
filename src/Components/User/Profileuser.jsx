@@ -134,11 +134,11 @@ function Profileuser() {
                     {edit === false ? 
                         <form method='PUT' action='#'>
                             <div className='flex items-center mb-5'>
-                                <h3 className="text-lg sm:text-base font-medium text-black w-1/2">Nama paket</h3>
+                                <h3 className="text-lg sm:text-base font-medium text-black w-1/2">Nama</h3>
                                 <input disabled type="text" name="nama" value={userProfile.nama} onChange={onChange} className='border border-gray-light p-2 w-full rounded-md bg-[#e9ecef] text-blue-text'/><br/>
                             </div>
                             <div className='flex items-center'>
-                                <h3 className="text-lg sm:text-base font-medium text-black w-1/2">Destinasi Wisata</h3>
+                                <h3 className="text-lg sm:text-base font-medium text-black w-1/2">Email</h3>
                                 <input disabled type="text" name="email" value={userProfile.email} onChange={onChange} className='border border-gray-light p-2 w-full rounded-md bg-[#e9ecef] text-blue-text'/><br/>
                             </div>
 
