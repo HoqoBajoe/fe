@@ -20,7 +20,9 @@ module.exports = {
       // => @media (min-width: 1536px) { ... }
     },
     colors: {
-      'blue': '#1fb6ff',
+      'blue': '#59CAFF',
+      'blue-light': '#8DDFFC',
+      'blue-dark': '#4EB0E9',
       'purple': '#7e5bef',
       'pink': '#ff49db',
       'orange': '#ff7849',
@@ -32,11 +34,17 @@ module.exports = {
       'white' : '#ffffff',
       'red' : '#e03131 ',
       'ivory' : '#f5f5f5',
-      'gray-white' : '#303030'
+      'gray-white' : '#303030',
+      'btn' : "#ED1B42",
+      'blue-text' : "#2B2B49",
+      'white-light' : "#EEF5FA",
+
+
     },
     extend: {
       backgroundImage: {
-        'home' : "url('/src/Images/bgimage.jpg')"
+        'home' : "url('/src/Images/william.jpg')",
+        'tour' : "url('/src/Images/pinkBeach.jpg')"
       }
     },
   },

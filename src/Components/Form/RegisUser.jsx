@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Axios } from '../../Helper/axios';
 import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2'
+import Loginimg from "../../Images/login.svg";
 
 function RegisUser() {
     const [form, setForm] = useState({
@@ -111,60 +112,63 @@ function RegisUser() {
         <div>
             <div className='static'>
             <div className="bg-home h-screen bg-cover bg-no-repeat flex">
-                <div className='container mx-auto my-auto'>
-                    <div className='w-1/3 m-auto mt-36 p-2 border-solid rounded-xl shadow-2xl mb-20 bg-ivory min-w-max sm:max-w-xl'>
-                        <h1 className="text-3xl sm:text-4xl mt-6 font-bold text-black mb-8 text-center">Hoqo Bajoe</h1>
-                        <form method='POST' action='#'>
-                            <div className="mb-2 mt-10 lg:mx-10 sm:mx-5 md:mx-5">
-                                <h3 className="text-lg sm:text-xl font-medium text-black mb-1">Nama</h3>
-                                <div>
-                                    <input 
-                                    type="text" 
-                                    name="nama" 
-                                    value={form.nama} 
-                                    onChange={onChange} 
-                                    className='w-full rounded-lg p-4 h-10 shadow-md leading-tight hover:shadow-lg transition'/>
-                                    <p className='text-red'>{errorMsg.nameError}</p>
-                                </div>  
-                            </div>
+                <div className='container mx-auto my-auto text-blue-text'>
+                    <div className='w-1/2 m-auto p-2 border-solid rounded-md shadow-2xl mb-20 bg-white flex gap-10'>
+                        <img src={Loginimg} className='w-1/2'/>
+                        <div>
+                            <h1 className="text-3xl sm:text-4xl mt-6 font-bold text-black mb-8 text-center">Hoqo Bajoe</h1>
+                            <form method='POST' action='#'>
+                                <div className="mb-2 mt-10">
+                                    <h3 className="text-lg sm:text-xl font-medium text-black mb-1">Nama</h3>
+                                    <div>
+                                        <input 
+                                        type="text" 
+                                        name="nama" 
+                                        value={form.nama} 
+                                        onChange={onChange} 
+                                        className='w-full rounded-md p-4 h-10 shadow-md leading-tight hover:shadow-lg transition'/>
+                                        <p className='text-red'>{errorMsg.nameError}</p>
+                                    </div>  
+                                </div>
 
-                            <div className="mb-2 mt-5 lg:mx-10 sm:mx-5 md:mx-5">
-                                <h3 className="text-lg sm:text-xl font-medium text-black mb-1">Email</h3>
-                                <div>
-                                    <input 
-                                        type="email" 
-                                        name="email" 
-                                        value={form.email} 
-                                        onChange={onChange} 
-                                        className='w-full rounded-lg p-4 h-10 shadow-md leading-tight hover:shadow-lg transition'/>
-                                    <p className='text-red'>{errorMsg.emailError}</p>
+                                <div className="mb-2 mt-5">
+                                    <h3 className="text-lg sm:text-xl font-medium text-black mb-1">Email</h3>
+                                    <div>
+                                        <input 
+                                            type="email" 
+                                            name="email" 
+                                            value={form.email} 
+                                            onChange={onChange} 
+                                            className='w-full rounded-md p-4 h-10 shadow-md leading-tight hover:shadow-lg transition'/>
+                                        <p className='text-red'>{errorMsg.emailError}</p>
+                                    </div>
                                 </div>
-                            </div>
-                            <div className="mb-4 mt-5 lg:mx-10 sm:mx-5 md:mx-5">
-                                <h3 className="text-xl sm:text-xl font-medium text-black mb-1">Password</h3>
-                                <div>
-                                    <input 
-                                        type="password" 
-                                        name="password" 
-                                        value={form.password} 
-                                        onChange={onChange} 
-                                        className='w-full rounded-lg p-4 h-10 shadow-md leading-tight hover:shadow-lg transition'/>
-                                    <p className='text-red'>{errorMsg.passError}</p>
+                                <div className="mb-4 mt-5">
+                                    <h3 className="text-xl sm:text-xl font-medium text-black mb-1">Password</h3>
+                                    <div>
+                                        <input 
+                                            type="password" 
+                                            name="password" 
+                                            value={form.password} 
+                                            onChange={onChange} 
+                                            className='w-full rounded-md p-4 h-10 shadow-md leading-tight hover:shadow-lg transition'/>
+                                        <p className='text-red'>{errorMsg.passError}</p>
+                                    </div>
                                 </div>
-                            </div>
-                            <div className='flex justify-center mt-10'>
-                            <button type='submit' onClick={onSubmit} className='text-white bg-gray p-2 rounded-lg w-72 mt-5 uppercase font-semibold shadow-md  hover:bg-gray-white'>Sign Up</button>
-                            </div>
-                            <div className="flex justify-center mt-5 mb-5">
-                                <Link to={'/login'}>
-                                    <a className="font-bold shadow-sm hover:shadow-lg hover:border-b-2 transition">Back To Login</a>
-                                </Link>
-                            </div>
-                        </form>
+                                <div className='flex justify-center mt-10'>
+                                <button type='submit' onClick={onSubmit} className='text-white bg-blue p-2 rounded-md w-72 mt-5 uppercase font-semibold shadow-md  hover:bg-blue-dark'>Sign Up</button>
+                                </div>
+                                <div className="flex justify-center mt-5 mb-5">
+                                    <Link to={'/login'}>
+                                        <a className="font-bold shadow-sm hover:shadow-lg hover:border-b-2 transition">Back To Login</a>
+                                    </Link>
+                                </div>
+                            </form>
+                        </div>
+                        
                         </div>
                     </div>
                 </div>
-                
             </div>
         </div>
     )

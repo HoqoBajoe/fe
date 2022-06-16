@@ -6,6 +6,7 @@ import Testimonial from '../Components/Testi/Testimonial';
 import Footer from '../Components/Navigation/Footer';
 import DashboardUser from '../Components/Information/DashboardUser';
 import Nav from '../Components/Navigation/Nav';
+import News from '../Components/Information/News';
 
 function HomePage() {
 
@@ -17,17 +18,12 @@ function HomePage() {
     <div>
       <Nav/>  
       <DashboardUser/>
-      <div className='sm:max-w-fit mx-auto'>
-          <div className='sm:max-w-7xl '>
-              <Info/>
-              <AiOutlineLine className='mt-24 mb-12 sm:w-96 mx-auto '/>
-              <HomeUser/>
-              <AiOutlineLine className='my-20 w-96 mx-auto '/>
-              <Testimonial/>
-              <AiOutlineLine className='my-20 w-96 mx-auto '/>
-          </div>
+      <div className='w-4/6 mx-auto my-20'>
+        <Info/>
+        <HomeUser/>
+        <Testimonial/>
+        <News/>
       </div>
-
       <Footer/>
     </div>
   )

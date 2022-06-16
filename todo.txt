@@ -37,3 +37,42 @@ List Admin
 -tour package: tampilannya masih kurang
 
 -transaction: get data bad request 404
+
+
+09 juni 2022
+
+ganti warna
+font poppins
+warna font
+
+halaman detail page
+- masih kurang tampilan add review dan fungsionalitas
+- handle add review kalo blm login disable
+- add transaksi V
+- handle add transaksi kalo blm login disable
+
+halaman user profile
+- tampilan: foto, data diri, history transaksi
+- buat tombol di bagian data diri untuk edit biar bisa merubah isi form
+
+halaman landing page
+- tampilan masih kurang
+- navbar diperbaiki
+
+13 juni 2022
+
+profile page
+-blm bisa update
+-history seharusnya ditampilkan yg sudah acc
+
+landing page
+-ganti informasi
+-query paket
+-tambahkan mendapatkan informasi dengan email
+
+
+14 juni 2022 
+
+-handle kalo blm login user: review, transaksi, profile page
+-request add review dan update profile masih blm bisa
+-di add review pake react rating

@@ -7,7 +7,7 @@ const Nav = () => {
 
 
     return (
-        <div className='shadow-md w-full fixed top-0 left-0 md:bg-transparent nav'>
+        <div className='shadow-md w-full top-0 left-0 bg-blue nav'>
             <div className='md:flex items-center justify-between py-4 md:px-10 px-7 border-b border-white mx-7'>
                 <Link to={'/'}>
                     <a className='font-bold text-2xl cursor-pointer flex items-center 
@@ -20,7 +20,7 @@ const Nav = () => {
                     <ion-icon name={open ? 'close':'menu'}></ion-icon>
                 </div>
 
-                <ul className={` md:mr-14 md:flex md:items-center gap-44 md:pb-0 pb-12 absolute md:static  md:z-auto z-[-1] left-0 w-full md:w-auto md:pl-0 pl-9 transition-all duration-500 ease-in text-white ${open ? 'top-20 ':'top-[-490px]'}`}>
+                <ul className={` md:mr-14 md:flex md:items-center gap-44 md:pb-0 pb-12 absolute md:static  z-40 left-0 w-full md:w-auto md:pl-0 pl-9 transition-all duration-500 ease-in text-white ${open ? 'top-20 ':'top-[-490px]'}`}>
                     {/* {
                     Links.map((link)=>(
                         <li key={link.name} className='md:ml-8 text-xl md:my-0 my-7'>
@@ -36,11 +36,11 @@ const Nav = () => {
                         </li>
 
                         <li className='md:ml-8 text-xl md:my-0 my-7'>
-                            <a href="/" className='text-gray-800 hover:text-gray-400 duration-500'>Discover</a>
+                            <a href="/tour" className='text-gray-800 hover:text-gray-400 duration-500'>Tour Package</a>
                         </li>
 
                         <li className='md:ml-8 text-xl md:my-0 my-7'>
-                            <a href="/" className='text-gray-800 hover:text-gray-400 duration-500'>Tour Package</a>
+                            <a href="/profile-user" className='text-gray-800 hover:text-gray-400 duration-500'>Profile</a>
                         </li>
                 </ul>
 
