@@ -21,6 +21,10 @@ function Profileuser() {
         created_at: "",
     });
 
+    const [active, setActive] = useState({
+        show: "Accepted",
+    })
+
     const [edit, setEdit] = useState(false)
 
     // const [form, setForm] = useState({
@@ -29,6 +33,16 @@ function Profileuser() {
     // })
 
     const id  = userProfile.id
+
+    const onPending = (e) => {
+        setActive({ show : "Pending" });
+    };
+    const onSuccess = (e) => {
+        setActive({ show : "Accepted" });
+    };
+    const onReject = (e) => {
+        setActive({ show : "Reject" });
+    };
 
     const onChange = (e) => {
         const name = e.target.name;
@@ -121,6 +135,7 @@ function Profileuser() {
     }, [setUserProfile,setHistoryTrans])
 
     console.log("data", userProfile)
+    console.log("transaksi: ", historyTrans)
     return (
         <div>
             <Nav/>
@@ -149,12 +164,12 @@ function Profileuser() {
                         :
                         <form method='PUT' action='#'>
                             <div className='flex items-center mb-5'>
-                                <h3 className="text-lg sm:text-base font-medium text-black w-1/2">Nama paket</h3>
+                                <h3 className="text-lg sm:text-base font-medium text-black w-1/2">Nama</h3>
                                 <input type="text" name="nama" value={userProfile.nama} onChange={onChange} className='border border-gray-light p-2 w-full rounded-md'/><br/>
                             </div>
 
                             <div className='flex items-center'>
-                                <h3 className="text-lg sm:text-base font-medium text-black w-1/2">Destinasi Wisata</h3>
+                                <h3 className="text-lg sm:text-base font-medium text-black w-1/2">Email</h3>
                                 <input type="text" name="email" value={userProfile.email} onChange={onChange} className='border border-gray-light p-2 w-full rounded-md'/><br/>
                             </div>
 
@@ -170,30 +185,47 @@ function Profileuser() {
                     {/* <p>{userProfile.created_at}</p> */}
                     <div className='border-t-2 border-gray-light mt-10'>
                     <h1 className='text-xl font-bold mb-8 mt-5 text-blue-text'>History Transaction</h1>
+                    
+                    <div className='flex border-b mb-3 border-gray-light'>
+                        {active.show == "Pending" ? <p className='p-2 border-x border-t rounded-t border-gray-light cursor-pointer'>Pending</p> : <p onClick={onPending} className='p-2 cursor-pointer'>Pending</p>}
+                        {active.show == "Accepted" ?  <p className='p-2 border-x border-t rounded-t border-gray-light cursor-pointer'>Success</p> : <p onClick={onSuccess}  className='p-2 cursor-pointer'>Success</p>}
+                        {active.show == "Reject" ? <p className='p-2 border-x border-t rounded-t border-gray-light cursor-pointer'>Reject</p> : <p onClick={onReject} className='p-2 cursor-pointer'>Reject</p>}
+                        
+                       
+                        
+                    </div>
+                    {/* {} */}
                     {historyTrans?.map((item) => (
-                        <div className='bg-white p-2 flex rounded-lg drop-shadow-md border border-gray-light mb-3'>
-                            <div className='w-2/5'>
-                                <p>{item.nama_paket}</p>
-                                <div className='flex'>
-                                    <p className='mr-1'>{item.pax}</p>
-                                    <p className='mr-1'>x</p>
-                                    <p>Rp. {item.harga}</p>
+                        <div>
+                            {item.status == active.show ?
+                                <div className='bg-white p-2 flex rounded-lg drop-shadow-md border border-gray-light mb-3'>
+                                    <div className='w-2/5'>
+                                        <p>{item.nama_paket}</p>
+                                        <div className='flex'>
+                                            <p className='mr-1'>{item.pax}</p>
+                                            <p className='mr-1'>x</p>
+                                            <p>Rp. {item.harga}</p>
+                                        </div>
+                                        
+                                    </div>
+                                    
+                                    <div className='w-2/5'>
+                                        <p>{item.metode}</p>
+                                        <p>{moment(item.created_at).format('LL')}</p>
+                                    </div>
+                                    
+                                    <div className=''>
+                                        <p>Total</p>
+                                        <p>{item.total}</p>
+                                    </div>
                                 </div>
-                                
-                            </div>
-                            
-                            <div className='w-2/5'>
-                                <p>{item.metode}</p>
-                                <p>{moment(item.created_at).format('LL')}</p>
-                            </div>
-                            
-                            <div className=''>
-                                <p>Total</p>
-                                <p>{item.total}</p>
-                            </div>
-                            
-                            
+                                :
+                                <div className='flex justify-center'>
+                                    <p className='p-5'>Belum ada transaksi</p>
+                                </div>
+                            }
                         </div>
+                        
                     ))}
                     </div>
                 </div>
