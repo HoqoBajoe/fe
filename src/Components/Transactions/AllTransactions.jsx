@@ -44,7 +44,7 @@ function AllTransactions() {
             .catch((err) =>{
                 Swal.fire(
                     'Transaction accepted error',
-                    'Transaction has been accepted error..',
+                    'Silahkan melakukan login terlebih dahulu..',
                     'error'
                 )
             })

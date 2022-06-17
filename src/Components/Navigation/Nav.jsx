@@ -1,10 +1,26 @@
 import React, { useState } from 'react'
 import { HiUserCircle } from "react-icons/hi";
-import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { Link, useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 const Nav = () => {
     let [open,setOpen]=useState(false);
+    const user = useSelector((state) => state.admin);
+    const navigate = useNavigate();
 
+    const onClick = () => {
+        if (user.id !== 0) {
+            navigate("/profile-user")
+        } else {
+            Swal.fire(
+                'Anda belum melakukan login!',
+                'Silahkan masuk terlebih dahulu.',
+                // 'error'
+            )
+            navigate("/login")
+        }
+    }
 
     return (
         <div className='shadow-md w-full top-0 left-0 bg-blue nav'>
@@ -40,7 +56,8 @@ const Nav = () => {
                         </li>
 
                         <li className='md:ml-8 text-xl md:my-0 my-7'>
-                            <a href="/profile-user" className='text-gray-800 hover:text-gray-400 duration-500'>Profile</a>
+                            {/* {user.id != 0 ? <a href="/profile-user" className='text-gray-800 hover:text-gray-400 duration-500'>Profile</a> : <a href="/login" className='text-gray-800 hover:text-gray-400 duration-500'>Profile</a>} */}
+                            <a onClick={onClick} className='cursor-pointer text-gray-800 hover:text-gray-400 duration-500'>Profile</a>
                         </li>
                 </ul>
 

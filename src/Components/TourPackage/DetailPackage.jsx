@@ -11,11 +11,14 @@ import Nav from '../Navigation/Nav';
 import Footer from '../Navigation/Footer';
 import Swal from 'sweetalert2';
 import Rating from 'react-rating';
+import { useSelector } from 'react-redux';
 
 
 function DetailPackage() {
     const { id } = useParams()
     const navigate = useNavigate();
+    const user = useSelector((state) => state.admin)
+    console.log("user: ", user.id)
 
     const initialValue = {
         nama_paket: "",
@@ -26,8 +29,8 @@ function DetailPackage() {
     }
 
     const [form, setForm] = useState({
-        rating: 0,
-        feedback: "",
+        stars: 0,
+        review: "",
     })
 
     const [transaction, setTransaction] = useState({
@@ -88,39 +91,38 @@ function DetailPackage() {
 
         console.log('form: ',form)
         // masih bermasalah di post karena req data tidak sesuai yg seharusnya int tapi diterima string atau ada masalah lain
-        // if (condition) {
-            
-        // } else {
-        //     Swal.fire(
-        //         'Anda belum melakukan login!',
-        //         'Silahkan masuk terlebih dahulu.',
-        //         'error'
-        //     )
-        //     navigate("/login")
-        // }
-        Axios.post(`/review/paket/${id}`, {...form})
-        .then((resp) => {
-            console.log(resp)
-            console.log("berhasil")
-            Swal.fire(
-                'Add review success!',
-                'Register new review successfully..',
-                'success'
-            )
-            setForm({
-                stars: 0,
-                feedback: ""
+        if (user.id !== 0) {
+            Axios.post(`/review/paket/${id}`, {...form})
+            .then((resp) => {
+                console.log(resp)
+                console.log("berhasil")
+                Swal.fire(
+                    'Add review success!',
+                    'Register new review successfully..',
+                    'success'
+                )
+                setForm({
+                    stars: 0,
+                    review: ""
+                })
             })
-        })
-        .catch((error) => {
-            console.log(error)
-            console.log('ISI: ',form)
+            .catch((error) => {
+                console.log(error)
+                console.log('ISI: ',form)
+                Swal.fire(
+                    'Add review error!',
+                    'Add new review error..',
+                    'error'
+                )
+            })
+        } else {
             Swal.fire(
-                'Add review error!',
-                'Add new review error..',
-                'error'
+                'Anda belum melakukan login!',
+                'Silahkan masuk terlebih dahulu.',
             )
-        })
+            navigate("/login")
+        }
+        
     }
 
     const onSubmitTransaction = (e) => {
@@ -128,36 +130,45 @@ function DetailPackage() {
 
         const jumlah = amount.click.toString();
 
-        Axios.post(`/transaction/paket/${id}`, {...transaction, pax: jumlah})
-        .then((resp) => {
-            console.log(resp)
-            console.log("berhasil")
-            Swal.fire(
-                'Add transaction success!',
-                'Register new transaction successfully..',
-                'success'
-            )
-            setTransaction({
-                metode: "",
-                pax: ""
+        if (user.id !== 0) {
+            Axios.post(`/transaction/paket/${id}`, {...transaction, pax: jumlah})
+            .then((resp) => {
+                console.log(resp)
+                console.log("berhasil")
+                Swal.fire(
+                    'Add transaction success!',
+                    'Register new transaction successfully..',
+                    'success'
+                )
+                setTransaction({
+                    metode: "",
+                    pax: ""
+                })
+                setAmount({
+                    click: 0
+                })
             })
-            setAmount({
-                click: 0
+            .catch((error) => {
+                console.log(error)
+                Swal.fire(
+                    'Add transaction error!',
+                    'Add new transaction error..',
+                    'error'
+                )
             })
-        })
-        .catch((error) => {
-            console.log(error)
+        } else {
             Swal.fire(
-                'Add transaction error!',
-                'Add new transaction error..',
-                'error'
+                'Anda belum melakukan login!',
+                'Silahkan masuk terlebih dahulu.',
             )
-        })
+            navigate("/login")
+        }
+        
     }
 
     const initStars = (star) =>{
         console.log('star: ',star)
-        form.rating = star
+        form.stars = star
         
     }
 
@@ -173,6 +184,7 @@ function DetailPackage() {
     // console.log('review: ',review)
     // console.log('transaksi: ',transaction)
     // console.log('bintang: ',form)
+    console.log('id: ',id)
     return (
         <div>
             <Nav/>
@@ -231,23 +243,24 @@ function DetailPackage() {
 
                     <div className='bg-white rounded-md drop-shadow p-3 w-full mx-auto mb-8'>
                         
-                        <div className='flex items-center gap-16 mb-5'>
-                            <p className="text-lg font-medium">Rating</p>
-                            <Rating
-                                emptySymbol={<AiFillStar className='fill-gray-light'/>}
-                                fullSymbol={<AiFillStar className='fill-[#ffd43b]'/>}
-                                onChange={(star) => initStars(star)}
-                                initialRating={form.rating}
-                            />
-                        </div>
+                        
                         
                         <form method='POST' action='#'>
+                            <div className='flex items-center gap-16 mb-5'>
+                                <p className="text-lg font-medium">Rating</p>
+                                <Rating
+                                    emptySymbol={<AiFillStar className='fill-gray-light'/>}
+                                    fullSymbol={<AiFillStar className='fill-[#ffd43b]'/>}
+                                    onChange={(star) => initStars(star)}
+                                    initialRating={form.stars}
+                                />
+                            </div>
                             <p className="text-lg font-medium mb-1">Comment</p>
                             <textarea 
                                 rows={6} 
                                 className='border w-full rounded-md border-gray-light'
-                                name="feedback" 
-                                value={form.feedback}
+                                name="review" 
+                                value={form.review}
                                 onChange={onChange}>
                             </textarea>
                             <div className='flex justify-end'>
