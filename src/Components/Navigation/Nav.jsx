@@ -13,12 +13,19 @@ const Nav = () => {
         if (user.id !== 0) {
             navigate("/profile-user")
         } else {
-            Swal.fire(
-                'Anda belum melakukan login!',
-                'Silahkan masuk terlebih dahulu.',
-                // 'error'
-            )
-            navigate("/login")
+            Swal.fire({
+                title: 'Anda belum melakukan login',
+                text: "Silahkan login terlebih dahulu",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#59CAFF',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Login'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    navigate("/login")
+                }
+            })
         }
     }
 
@@ -62,9 +69,14 @@ const Nav = () => {
                 </ul>
 
                 <div>
-                    <Link to="/login">
-                        <HiUserCircle color='white' className='w-8 h-8'/>
-                    </Link>  
+                    {user.id !== 0 ? 
+                        <p className='text-white font-semibold text-lg flex items-center gap-1'><HiUserCircle color='white' className='w-8 h-8'/> {user.nama}</p>
+                        :
+                        <Link to="/login">
+                            <HiUserCircle color='white' className='w-8 h-8'/>
+                        </Link>  
+                    }
+                    
                 </div>
             </div>
         </div>

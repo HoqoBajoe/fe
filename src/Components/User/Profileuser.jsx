@@ -9,6 +9,9 @@ import Footer from '../Navigation/Footer';
 import { useNavigate } from 'react-router-dom';
 import { FiLogOut } from "react-icons/fi";
 import { logout } from '../../Redux/AdminSlice';
+import { BsFillCheckCircleFill } from "react-icons/bs";
+import { MdPending } from "react-icons/md";
+import { ImCross } from "react-icons/im";
 
 function Profileuser() {
     const dispatch = useDispatch();
@@ -178,11 +181,12 @@ function Profileuser() {
                         <h1 className='text-xl font-bold mb-8 mt-5 text-blue-text'>History Transaction</h1>
                         
                         <div className='flex border-b mb-3 border-gray-light'>
-                            {active.show == "Pending" ? <p className='p-2 border-x border-t rounded-t border-gray-light cursor-pointer'>Pending</p> : <p onClick={onPending} className='p-2 cursor-pointer'>Pending</p>}
-                            {active.show == "Accepted" ?  <p className='p-2 border-x border-t rounded-t border-gray-light cursor-pointer'>Success</p> : <p onClick={onSuccess}  className='p-2 cursor-pointer'>Success</p>}
-                            {active.show == "Reject" ? <p className='p-2 border-x border-t rounded-t border-gray-light cursor-pointer'>Reject</p> : <p onClick={onReject} className='p-2 cursor-pointer'>Reject</p>}
+                            {active.show == "Pending" ? <p className='p-2 border-x border-t rounded-t border-gray-light cursor-pointer flex items-center gap-2'><MdPending className='fill-[#495057]'/>Pending</p> : <p onClick={onPending} className='p-2 cursor-pointer flex items-center gap-2'><MdPending className='fill-[#495057]'/>Pending</p>}
+                            {active.show == "Accepted" ?  <p className='p-2 border-x border-t rounded-t border-gray-light cursor-pointer flex items-center gap-2'><BsFillCheckCircleFill className='fill-green'/>Success</p> : <p onClick={onSuccess}  className='p-2 cursor-pointer flex items-center gap-2'><BsFillCheckCircleFill className='fill-green'/>Success</p>}
+                            {active.show == "Reject" ? <p className='p-2 border-x border-t rounded-t border-gray-light cursor-pointer flex items-center gap-2'><ImCross className='fill-red'/> Reject</p> : <p onClick={onReject} className='p-2 cursor-pointer flex items-center gap-2'><ImCross className='fill-red'/>Reject</p>}
                         </div>
                         {historyTrans?.map((item) => (
+                            
                             <div>
                                 {item.status == active.show ?
                                     <div className='bg-white p-2 flex rounded-lg drop-shadow-md border border-gray-light mb-3'>
@@ -207,9 +211,10 @@ function Profileuser() {
                                         </div>
                                     </div>
                                     :
-                                    <div className='flex justify-center'>
-                                        <p className='p-5'>Belum ada transaksi</p>
-                                    </div>
+                                    // <div className='flex justify-center'>
+                                    //     <p className='p-5'>Belum ada transaksi</p>
+                                    // </div>
+                                    null
                                 }
                             </div>
                             

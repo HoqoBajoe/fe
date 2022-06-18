@@ -116,11 +116,19 @@ function DetailPackage() {
                 )
             })
         } else {
-            Swal.fire(
-                'Anda belum melakukan login!',
-                'Silahkan masuk terlebih dahulu.',
-            )
-            navigate("/login")
+            Swal.fire({
+                title: 'Anda belum melakukan login',
+                text: "Silahkan login terlebih dahulu",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#59CAFF',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Login'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    navigate("/login")
+                }
+            })
         }
         
     }
@@ -157,11 +165,19 @@ function DetailPackage() {
                 )
             })
         } else {
-            Swal.fire(
-                'Anda belum melakukan login!',
-                'Silahkan masuk terlebih dahulu.',
-            )
-            navigate("/login")
+            Swal.fire({
+                title: 'Anda belum melakukan login',
+                text: "Silahkan login terlebih dahulu",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#59CAFF',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Login'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    navigate("/login")
+                }
+            })
         }
         
     }
@@ -185,6 +201,9 @@ function DetailPackage() {
     // console.log('transaksi: ',transaction)
     // console.log('bintang: ',form)
     console.log('id: ',id)
+
+    
+
     return (
         <div>
             <Nav/>
@@ -272,7 +291,9 @@ function DetailPackage() {
             </div>
 
            
-
+            {/* <button data-swal-template="#my-template">
+                Trigger modal
+            </button> */}
             {/* <div className='bg-white rounded-md drop-shadow-lg  p-7 border border-gray-light w-3/5 mx-auto mb-16 mt-20'>                
                 <form method='POST' action='#'>
                     <div className='flex justify-between'>

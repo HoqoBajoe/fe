@@ -23,6 +23,7 @@ function Login() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const cookies = new Cookies();
+    // const history = useHisto
 
     const onChange = (e) => {
         const name = e.target.name;
@@ -85,9 +86,7 @@ function Login() {
                         )
                     if (resp.data.data.role === 'super-admin' || resp.data.data.role === 'admin'){
                         navigate("/dashboard")
-                    } else {
-                        navigate('/')
-                    }
+                    } 
                     })
             .catch(err => {
                 Swal.fire(
