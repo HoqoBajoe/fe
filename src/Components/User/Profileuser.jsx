@@ -9,16 +9,20 @@ import Footer from '../Navigation/Footer';
 import { useNavigate } from 'react-router-dom';
 import { FiLogOut } from "react-icons/fi";
 import { logout } from '../../Redux/AdminSlice';
+import { BsFillCheckCircleFill } from "react-icons/bs";
+import { MdPending } from "react-icons/md";
+import { ImCross } from "react-icons/im";
 
 function Profileuser() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
     const [userProfile, setUserProfile] = useState({
-        id: "",
-        nama: "",
+        // id: "",
         email: "",
-        created_at: "",
+        nama: "",
+        
+        // created_at: "",
     });
 
     const [active, setActive] = useState({
@@ -27,7 +31,7 @@ function Profileuser() {
 
     const [edit, setEdit] = useState(false)
 
-    const id  = userProfile.id
+    // const id  = userProfile.id
 
     const onPending = (e) => {
         setActive({ show : "Pending" });
@@ -47,19 +51,6 @@ function Profileuser() {
 
     const [historyTrans, setHistoryTrans] = useState([])
 
-    // const fetchHistoryTrans = () => {
-    //     Axios.get(`/history`).then((resp) =>{
-    //         setHistoryTrans({
-    //             nama_paket: resp.data.data.nama_paket,
-    //             metode: resp.data.data.metode,
-    //             pax: resp.data.data.pax,
-    //             total: resp.data.data.total,
-    //             status: resp.data.data.status,
-    //             created_at: resp.data.data.created_at,
-    //         })
-    //     })
-    // }
-
      const fetchHistoryTrans = () => {
         Axios.get(`/history`).then((resp) =>{
             setHistoryTrans(resp.data.data)
@@ -69,14 +60,13 @@ function Profileuser() {
     const fetchData = () => {
         Axios.get(`/account`).then((resp) =>{
             setUserProfile({
-                id: resp.data.data.id,
+                // id: resp.data.data.id,
                 nama: resp.data.data.nama,
                 email: resp.data.data.email,
-                created_at: resp.data.data.created_at,
+                // created_at: resp.data.data.created_at,
             })
         })
     }
-    console.log("id", id)
 
     const onClickEdit = (e) => {
         e.preventDefault();
@@ -86,9 +76,10 @@ function Profileuser() {
 
     const onSubmit = (e) => {
         e.preventDefault();
+        console.log("cek: ", userProfile)
         
         Axios
-            .put(`/user/update/${id}`,{...userProfile})
+            .put(`/user/update`,{...userProfile})
             .then((response) => {
                 console.log(response);
                 Swal.fire(
@@ -130,7 +121,6 @@ function Profileuser() {
     }, [setUserProfile,setHistoryTrans])
 
     console.log("data", userProfile)
-    console.log("transaksi: ", historyTrans)
     return (
         <div>
             <Nav/>
@@ -178,11 +168,12 @@ function Profileuser() {
                         <h1 className='text-xl font-bold mb-8 mt-5 text-blue-text'>History Transaction</h1>
                         
                         <div className='flex border-b mb-3 border-gray-light'>
-                            {active.show == "Pending" ? <p className='p-2 border-x border-t rounded-t border-gray-light cursor-pointer'>Pending</p> : <p onClick={onPending} className='p-2 cursor-pointer'>Pending</p>}
-                            {active.show == "Accepted" ?  <p className='p-2 border-x border-t rounded-t border-gray-light cursor-pointer'>Success</p> : <p onClick={onSuccess}  className='p-2 cursor-pointer'>Success</p>}
-                            {active.show == "Reject" ? <p className='p-2 border-x border-t rounded-t border-gray-light cursor-pointer'>Reject</p> : <p onClick={onReject} className='p-2 cursor-pointer'>Reject</p>}
+                            {active.show == "Pending" ? <p className='p-2 border-x border-t rounded-t border-gray-light cursor-pointer flex items-center gap-2'><MdPending className='fill-[#495057]'/>Pending</p> : <p onClick={onPending} className='p-2 cursor-pointer flex items-center gap-2'><MdPending className='fill-[#495057]'/>Pending</p>}
+                            {active.show == "Accepted" ?  <p className='p-2 border-x border-t rounded-t border-gray-light cursor-pointer flex items-center gap-2'><BsFillCheckCircleFill className='fill-green'/>Success</p> : <p onClick={onSuccess}  className='p-2 cursor-pointer flex items-center gap-2'><BsFillCheckCircleFill className='fill-green'/>Success</p>}
+                            {active.show == "Reject" ? <p className='p-2 border-x border-t rounded-t border-gray-light cursor-pointer flex items-center gap-2'><ImCross className='fill-red'/> Reject</p> : <p onClick={onReject} className='p-2 cursor-pointer flex items-center gap-2'><ImCross className='fill-red'/>Reject</p>}
                         </div>
                         {historyTrans?.map((item) => (
+                            
                             <div>
                                 {item.status == active.show ?
                                     <div className='bg-white p-2 flex rounded-lg drop-shadow-md border border-gray-light mb-3'>
@@ -207,9 +198,7 @@ function Profileuser() {
                                         </div>
                                     </div>
                                     :
-                                    <div className='flex justify-center'>
-                                        <p className='p-5'>Belum ada transaksi</p>
-                                    </div>
+                                    null
                                 }
                             </div>
                             
