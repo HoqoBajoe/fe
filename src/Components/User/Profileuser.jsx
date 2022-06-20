@@ -60,10 +60,8 @@ function Profileuser() {
     const fetchData = () => {
         Axios.get(`/account`).then((resp) =>{
             setUserProfile({
-                // id: resp.data.data.id,
                 nama: resp.data.data.nama,
                 email: resp.data.data.email,
-                // created_at: resp.data.data.created_at,
             })
         })
     }
@@ -104,14 +102,14 @@ function Profileuser() {
         dispatch(logout());
         sessionStorage.removeItem('token');
         Swal.fire(
-        "Logout success!",
-        "Redirecting to Homepage..",
-        'success'
+            "Logout success!",
+            "Redirecting to Homepage..",
+            'success'
         )
         if (window.location.pathname) {
-        navigate("/");
+            navigate("/");
         } else {
-        window.location.reload();
+            window.location.reload();
         }
     };
 
@@ -125,7 +123,7 @@ function Profileuser() {
         <div>
             <Nav/>
             <div className='w-1/2 mx-auto my-20 text-blue-text'>
-                <img src={Gambar} className='w-2/5 mx-auto mb-10'/>
+                <img src={Gambar} alt="header-my-profile" className='w-2/5 mx-auto mb-10'/>
                 <div className='border border-gray-light rounded-lg p-3'>
                     <h1 className='text-xl font-bold mb-2 mt-3 text-blue-text'>My Profile</h1>
                     <div className='flex justify-end'>
