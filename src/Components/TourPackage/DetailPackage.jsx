@@ -86,11 +86,8 @@ function DetailPackage() {
         })
     }
 
-    const onSubmit = (e, id) => {
+    const onSubmit = (e) => {
         e.preventDefault();
-
-        console.log('form: ',form)
-        // masih bermasalah di post karena req data tidak sesuai yg seharusnya int tapi diterima string atau ada masalah lain
         if (user.id !== 0) {
             Axios.post(`/review/paket/${id}`, {...form})
             .then((resp) => {
@@ -196,13 +193,7 @@ function DetailPackage() {
         initStars();
     }, [setTourPackage,setReview, setForm])
 
-    // console.log('tour: ',tourPackage)
-    // console.log('review: ',review)
-    // console.log('transaksi: ',transaction)
-    // console.log('bintang: ',form)
-    console.log('id: ',id)
-
-    
+    console.log('review: ',review)
 
     return (
         <div>
@@ -233,37 +224,35 @@ function DetailPackage() {
                     <div className='border-t-2 border-gray-light'>
                         <p className='text-xl font-bold mb-2  mt-3'>Review</p>
                         {review?.map((item) => (
-                            <div key={item.id} className='flex items-center justify-between gap-12 bg-white text-[#495057] rounded-md drop-shadow p-3 w-full mx-auto mb-8'>
-                                <div>
-                                    <p>{item.nama}</p>
-                                    <p className='text-sm italic text-[#adb5bd]'>{moment(item.created_at, "YYYYMMDD").fromNow()}</p>
-                                </div>
+                            <div>
+                                {item.status == "Accepted" ?
+                                    <div key={item.id} className='flex items-center justify-between gap-12 bg-white text-[#495057] rounded-md drop-shadow p-3 w-full mx-auto mb-8'>
+                                        <div>
+                                            <p>{item.nama}</p>
+                                            <p className='text-sm italic text-[#adb5bd]'>{moment(item.created_at, "YYYYMMDD").fromNow()}</p>
+                                        </div>
 
-                                <div>
-                                    <div className='flex items-center gap-2'>
-                                        <AiFillStar className='fill-[#ffd43b]'/>
-                                        <p>{item.stars}</p>
+                                        <div>
+                                            <div className='flex items-center gap-2'>
+                                                <AiFillStar className='fill-[#ffd43b]'/>
+                                                <p>{item.stars}</p>
+                                            </div>
+                                            
+                                            <p>{item.review}</p>
+                                        </div> 
                                     </div>
-                                    
-                                    <p>{item.review}</p>
-                                </div>
-                                
+                                    :
+                                    <div className='flex justify-center bg-white text-[#495057] rounded-md drop-shadow p-3 w-full mx-auto mb-8'>
+                                        <p className='p-2'>Belum ada review</p>
+                                    </div>
+                                }
                                 
                             </div>
+                            
                         ))}
                     </div>
 
-                     {/* <Rating
-                        emptySymbol={<AiFillStar className='fill-gray-light'/>}
-                        fullSymbol={<AiFillStar className='fill-[#ffd43b]'/>}
-                        onChange={(star) => initStars(star)}
-                        initialRating={form.rating}
-                    /> */}
-
                     <div className='bg-white rounded-md drop-shadow p-3 w-full mx-auto mb-8'>
-                        
-                        
-                        
                         <form method='POST' action='#'>
                             <div className='flex items-center gap-16 mb-5'>
                                 <p className="text-lg font-medium">Rating</p>
@@ -289,42 +278,6 @@ function DetailPackage() {
                     </div>
                 </div>
             </div>
-
-           
-            {/* <button data-swal-template="#my-template">
-                Trigger modal
-            </button> */}
-            {/* <div className='bg-white rounded-md drop-shadow-lg  p-7 border border-gray-light w-3/5 mx-auto mb-16 mt-20'>                
-                <form method='POST' action='#'>
-                    <div className='flex justify-between'>
-                        <p className="text-xl font-medium">Stars</p>
-                        <div className='mb-3'>
-                            <input 
-                                type="number" 
-                                name="stars" 
-                                value={form.stars} 
-                                onChange={onChange}
-                                className='border border-gray-light p-1 w-96 rounded'/>
-                                
-                        </div>
-                    </div>
-                    <div className='flex justify-between'>
-                        <p className="text-xl font-medium">Review</p>
-                        <div className='mb-3'>
-                            <input  
-                            type="text" 
-                            name="feedback" 
-                            value={form.feedback}
-                            onChange={onChange}
-                            className='border border-gray-light p-2 w-full rounded'/>
-                        </div>
-                        
-                    </div>
-                    <div className='flex justify-center'>
-                        <button type='submit' onClick={onSubmit} className='text-white bg-gray p-2 rounded-lg w-72 mt-5'>Add Review</button>
-                    </div>
-                </form>
-            </div> */}
 
             <div className='relative'>
                 <div className='bg-white rounded-md drop-shadow-md p-3 border border-gray-light w-1/5 right-5 top-24 fixed'>                
